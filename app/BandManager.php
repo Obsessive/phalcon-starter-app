@@ -41,13 +41,10 @@ class BandManager {
 			 */
 			echo $this->application->handle()->getContent();
 
-		} catch (Phalcon\Exception $e) {
-			echo $e->getMessage();
-
-		} catch (PDOException $e){
-			echo $e->getMessage();
-		}
-
+		} catch (\Exception $e) {
+            $logger = $this->di->get('app.log.error');
+            $logger->error('An error occured: '.$e->getMessage()."\n");
+        }
 	}
 
 }
