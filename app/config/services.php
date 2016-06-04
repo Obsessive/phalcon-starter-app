@@ -13,15 +13,12 @@ $this->di->setShared('config', function () {
     return new Config(require __DIR__ . '/config.php');
 });
 
-/**
- * The URL component is used to generate all kind of urls in the application
- */
-/*$this->di->setShared('url', function() use ($config) {
+$this->di->setShared('url', function() {
 	$url = new UrlResolver();
-	$url->setBaseUri($config->application->baseUri);
+	$url->setBaseUri('/');
 	return $url;
 });
-*/
+
 
 $this->di->setShared('router', function () {
     $router = require __DIR__ . '/routes.php';
@@ -32,13 +29,9 @@ $this->di->setShared('router', function () {
 $this->di->setShared('dispatcher', function () {
     $dispatcher = new Dispatcher();
     $dispatcher->setDefaultNamespace('app\controllers');
-
     return $dispatcher;
 });
 
-/**
- * Setting up the view component
- */
 $this->di->setShared('view', function() {
 
 	$view = new View();
@@ -51,26 +44,25 @@ $this->di->setShared('view', function() {
 });
 
 $this->di->set('volt', function($view) {
-        $config = $this->di->get('config');
-        $volt= new View\Engine\Volt($view, $this->di);
-        $volt->setOptions(
-            [
-                'autoescape'        => false,
-                'compileAlways'     => true,
-                'compiledPath'      => $config->volt->path,
-                'compiledExtension' => $config->volt->extension,
-                'compiledSeparator' => $config->volt->separator,
-                'stat'              => (bool) $config->volt->stat,
-            ]
-        );
+
+    $config = $this->di->get('config');
+    $volt= new View\Engine\Volt($view, $this->di);
+    $volt->setOptions(
+        [
+            'autoescape'        => false,
+            'compileAlways'     => true,
+            'compiledPath'      => $config->volt->path,
+            'compiledExtension' => $config->volt->extension,
+            'compiledSeparator' => $config->volt->separator,
+            'stat'              => (bool) $config->volt->stat,
+        ]
+    );
 
     return $volt;
 });
 
-/**
- * Database connection is created based in the parameters defined in the configuration file
- */
-/*$di->set('db', function() use ($config) {
+$this->di->set('db', function() {
+    $config = $this->di->get('config');
 	return new DbAdapter(array(
 		'host' => $config->database->host,
 		'username' => $config->database->username,
@@ -78,14 +70,15 @@ $this->di->set('volt', function($view) {
 		'dbname' => $config->database->dbname
 	));
 });
-*/
 
-/**
- * Start the session the first time some component request the session service
- */
-/*$di->set('session', function() {
+$this->di->set('session', function() {
 	$session = new SessionAdapter();
 	$session->start();
 	return $session;
 });
-*/
+
+/** Logging */
+$this->di->setShared('app.log.error',function(){
+        $logger = new \Phalcon\Logger\Adapter\File(APP_ROOT.'/logs/'.'error_log-'.date('Y-m-d').'.log');
+        return $logger;
+});
