@@ -3,10 +3,11 @@
 use Phalcon\Mvc\Router;
 
 return call_user_func(
-
     function() {
+        
         $createDefaultRoutes = false;
         $router = new Router($createDefaultRoutes);
+
         // prefix
         $p = 'app\controllers\\';
 
