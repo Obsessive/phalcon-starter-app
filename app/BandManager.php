@@ -32,6 +32,14 @@ class BandManager {
         require APP_ROOT . '/app/config/services.php';
     }
 
+    /**
+     * Runs basic tables creation script on database
+     */
+    public function basicDatabase()
+    {
+        $this->di->get('app.services.migration')->init();
+    }
+
 	public function run()
 	{
 		try {
@@ -42,6 +50,7 @@ class BandManager {
 			echo $this->application->handle()->getContent();
 
 		} catch (\Exception $e) {
+            
             $logger = $this->di->get('app.log.error');
             $logger->error('An error occured: '.$e->getMessage()."\n");
         }

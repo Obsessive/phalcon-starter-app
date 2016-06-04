@@ -77,8 +77,15 @@ $this->di->set('session', function() {
 	return $session;
 });
 
-/** Logging */
-$this->di->setShared('app.log.error',function(){
+/* Services */
+$this->di->setShared('app.services.migration', function() {
+    return new app\services\MigrationService($this->di->get('db'));
+});
+
+
+
+/* Logging */
+$this->di->setShared('app.log.error', function() {
         $logger = new \Phalcon\Logger\Adapter\File(APP_ROOT.'/logs/'.'error_log-'.date('Y-m-d').'.log');
         return $logger;
 });
