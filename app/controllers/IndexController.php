@@ -2,21 +2,30 @@
 
 namespace app\controllers;
 
-use app\models\User;
-
-
 class IndexController extends ControllerBase
 {
+	public function onConstruct()
+	{
+		$this->facebookService = $this->di->get('app.services.facebook');
+	}
 
     public function indexAction()
     {
-        $user = User::find(1)->getFirst();
+    	if ($this->user) {
+    		return $this->response->redirect('/app');
+    	}
 
-        echo json_encode($user->toArray());exit;
+    	$this->view->url = $this->facebookService->getLoginUrl();
+    }
+
+    public function logoutAction()
+    {
+    	$this->session->destroy();
+    	return $this->response->redirect('/', false);
     }
 
     public function notFoundAction()
     {
-    	echo "Not Found";
+    	return $this->response->redirect('/');
     }
 }
