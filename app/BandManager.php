@@ -4,6 +4,7 @@ namespace app;
 
 use Phalcon\Mvc\Application;
 use Phalcon\DI\FactoryDefault;
+use Phalcon\Session\Adapter\Files as SessionAdapter;
 
 define('APP_ROOT', realpath(__DIR__ . '/..'));
 
@@ -19,6 +20,11 @@ class BandManager {
      */
     private $application;
 
+    /**
+     * @var use Phalcon\Session\Adapter\Files as SessionAdapter
+     */
+    private $session;
+
     public function __construct()
     {
     	$this->di = new FactoryDefault();
@@ -30,6 +36,7 @@ class BandManager {
     private function loadServices()
     {
         require APP_ROOT . '/app/config/services.php';
+        $this->session = $this->di->get('session');
     }
 
     /**
@@ -52,7 +59,7 @@ class BandManager {
 		} catch (\Exception $e) {
             
             $logger = $this->di->get('app.log.error');
-            $logger->error('An error occured: '.$e->getMessage()."\n");
+            $logger->error($e->getMessage());
         }
 	}
 
