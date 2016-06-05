@@ -4,6 +4,7 @@ use Phalcon\Config;
 use	Phalcon\Mvc\View;
 use Phalcon\Mvc\Dispatcher;
 use	Phalcon\Mvc\Url as UrlResolver;
+use Phalcon\Http\Request;
 use	Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use	Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use	Phalcon\Session\Adapter\Files as SessionAdapter;
@@ -71,17 +72,31 @@ $this->di->set('db', function() {
 	));
 });
 
-$this->di->set('session', function() {
+$this->di->setShared('session', function() {
 	$session = new SessionAdapter();
 	$session->start();
 	return $session;
 });
 
-/* Services */
-$this->di->setShared('app.services.migration', function() {
-    return new app\services\MigrationService($this->di->get('db'));
+/* Repositories */
+$this->di->setShared('app.repositories.user', function() {
+    return new app\repositories\UserRepository();
 });
 
+/* Services */
+$this->di->setShared('app.services.migration', function() {
+    return new app\services\MigrationService( $this->di->get('db') );
+});
+
+$this->di->setShared('app.services.user', function() {
+    return new app\services\UserService( $this->di->get('session') );
+});
+
+$this->di->setShared('app.services.facebook', function() {
+    $config = $this->di->get('config');
+    $facebook = new Facebook\Facebook($config->facebook->toArray());
+    return new app\services\FacebookService( $facebook, $this->di->get('config'), $this->di->get('app.log.error') );
+});
 
 
 /* Logging */
