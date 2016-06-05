@@ -11,8 +11,10 @@ return call_user_func(
         // prefix
         $p = 'app\controllers\\';
 
-       $router->add('/', $p . 'Index::index')->via(['GET', 'POST']);
-       $router->add('/test', $p . 'Index::test')->via(['GET', 'POST']);
+       $router->addGet('/', $p . 'Index::index');
+       $router->addGet('/auth/callback', $p . 'Auth::callback');
+       $router->addGet('/logout', $p . 'Index::logout');
+       $router->addGet('/app', $p . 'App::index');
 
         $router->notFound(['controller' => 'index', 'action' => 'notFound']);
 
