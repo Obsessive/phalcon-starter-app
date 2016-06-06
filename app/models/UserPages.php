@@ -22,6 +22,16 @@ class UserPages extends Model
     public $page_id;
 
     /**
+     * @var string
+     */
+    public $page_access_token;
+
+    public function initialize()
+    {
+        $this->belongsTo("page_id","app\\models\\Page","id", array('alias' => 'page'));
+    }
+
+    /**
      * Returns the table name.
      *
      * @return string

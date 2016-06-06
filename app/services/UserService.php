@@ -17,6 +17,9 @@ class UserService
 		$this->session = $session;
 	}
 
+	/**
+	 * Get logged in user
+	 */
 	public function getCurrentUser()
 	{
 		$userId = $this->session->get('userId');
@@ -26,6 +29,9 @@ class UserService
 		return null;
 	}
 
+	/**
+	 * Log in user into application (save id to session)
+	 */
 	public function setUser(User $user)
 	{
 		$this->session->set('userId', $user->id);

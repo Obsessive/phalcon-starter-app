@@ -9,6 +9,9 @@ class IndexController extends ControllerBase
 		$this->facebookService = $this->di->get('app.services.facebook');
 	}
 
+    /**
+     * Application landing page - redirect to dashboard if user logged in
+     */
     public function indexAction()
     {
     	if ($this->user) {
@@ -18,6 +21,9 @@ class IndexController extends ControllerBase
     	$this->view->url = $this->facebookService->getLoginUrl();
     }
 
+    /**
+     * Logout user
+     */
     public function logoutAction()
     {
     	$this->session->destroy();

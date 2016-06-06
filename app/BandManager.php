@@ -59,7 +59,8 @@ class BandManager {
 		} catch (\Exception $e) {
             
             $logger = $this->di->get('app.log.error');
-            $logger->error($e->getMessage());
+            $logger->error('Message: ' . $e->getMessage());
+            $logger->error('Error trace: ' . $e->getTraceAsString());
         }
 	}
 

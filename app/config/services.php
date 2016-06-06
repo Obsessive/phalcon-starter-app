@@ -83,6 +83,10 @@ $this->di->setShared('app.repositories.user', function() {
     return new app\repositories\UserRepository();
 });
 
+$this->di->setShared('app.repositories.page', function() {
+    return new app\repositories\PageRepository();
+});
+
 /* Services */
 $this->di->setShared('app.services.migration', function() {
     return new app\services\MigrationService( $this->di->get('db') );
@@ -95,7 +99,7 @@ $this->di->setShared('app.services.user', function() {
 $this->di->setShared('app.services.facebook', function() {
     $config = $this->di->get('config');
     $facebook = new Facebook\Facebook($config->facebook->toArray());
-    return new app\services\FacebookService( $facebook, $this->di->get('config'), $this->di->get('app.log.error') );
+    return new app\services\FacebookService( $facebook, $this->di->get('config'), $this->di->get('app.log.error'), $this->di->get('app.services.user'), $this->di->get('session') );
 });
 
 

@@ -5,6 +5,9 @@ namespace app\services;
 use Phalcon\Config;
 use Phalcon\Http\Request;
 use Phalcon\Logger\Adapter\File as Log;
+use Phalcon\Session\Adapter\Files as Session;
+use app\models\UserPages;
+use app\services\UserService;
 use Facebook\Facebook;
 
 class FacebookService
@@ -24,12 +27,34 @@ class FacebookService
      */
     protected $logger;
 
+    /**
+     * @var app\services\UserService
+     */
+    protected $userService;
 
-    public function __construct( Facebook $fb, Config $config, Log $log )
+    /**
+     * @var use Phalcon\Session\Adapter\Files as Session
+     */
+    protected $session;
+
+    /**
+     * string access_token;
+     */
+    private $access_token;
+
+    public function __construct( Facebook $fb, Config $config, Log $log, UserService $us, Session $session )
     {
         $this->fb = $fb;
         $this->config = $config;
         $this->logger = $log;
+        $this->userService = $us;
+        $this->session = $session;
+
+        if ($this->session->get('accessToken') && !$this->access_token) {
+
+            $this->access_token = $this->session->get('accessToken');
+            $this->fb->setDefaultAccessToken($this->access_token);
+        }
     }
 
     /**
@@ -46,27 +71,77 @@ class FacebookService
                         ->getLoginUrl($callback, $perms);
     }
 
+    /**
+     * Get access token from Facebook callback and save it to session for future use
+     */
     public function getAccessTokenFromCallback()
     {
         try {
-            return $this->fb->getRedirectLoginHelper()
+            $access_token = $this->fb->getRedirectLoginHelper()
                               ->getAccessToken();
-    
+
+            $this->session->set('accessToken', $access_token);
+            return $access_token;
+
         } catch(\Exception $e) {
-          $this->logger->error($e->getMessage());
+           $this->handleError($e);
         }
     }
 
-    public function getUserByToken($accessToken)
+    /**
+     * Get Facebook user with session saved access token
+     */
+    public function getFacebookUser($access_token)
     {
-        $this->fb->setDefaultAccessToken($accessToken);
+        if (! $this->session->get('access_token')) {
+            $this->session->set('accessToken', $access_token);
+        }
 
         try {
-            return $this->fb->get('/me?fields=name,picture.type(large)')->getGraphUser();
+            return $this->fb->get('/me?fields=name,picture.type(large)', $access_token)->getGraphUser();
                
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
         }
     }
+
+    /**
+     * Get user pages (Musician/Band)
+     */
+    public function getUserPages()
+    {
+        $user = $this->userService->getCurrentUser();
+        if (! $user) {
+            return null;
+        }
+
+        try {
+            return $this->fb->get('/me/accounts')->getGraphEdge();
+
+        } catch(\Exception $e) {
+           $this->handleError($e);
+        }
+    }
+
+    /**
+     * Get basic page details from Facebook
+     */
+    public function getPageDetails($page)
+    {
+        try {
+            $query = '/'.$page->facebook_page_id.'?fields=name,about,genre,bio,picture,band_members,influences';
+            return $this->fb->get($query)->getGraphPage();
+               
+        } catch (\Exception $e) {
+           $this->handleError($e);
+        }
+    }
+
+    public function handleError(\Exception $e)
+    {
+        $this->logger->error('Message: ' . $e->getMessage());
+        $this->logger->error('Error trace: ' . $e->getTraceAsString());
+    }
+
 
 }

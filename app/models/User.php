@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Phalcon\Mvc\Model;
+use app\models\UserPages;
 
 class User extends Model
 {
@@ -40,6 +41,20 @@ class User extends Model
     public function getSource()
     {
         return 'users';
+    }
+
+    /**
+     * Check if user can access given page. Return the Page model
+     */
+    public function checkPageAccess($pageId)
+    {
+        $userPage = UserPages::findFirst('page_id='.$pageId);
+
+        if ( $userPage && ($userPage->user_id == $this->id) ) {
+            return $userPage->page;
+        }
+
+        return false;
     }
 
 }
