@@ -12,6 +12,7 @@ class AppController extends ControllerBase
     public function indexAction()
     {
     	// Dashboard index
+        echo "Dashboard";
     }
 
     public function pagesAction()

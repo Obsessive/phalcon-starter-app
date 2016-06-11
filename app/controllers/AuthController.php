@@ -18,6 +18,14 @@ class AuthController extends ControllerBase
      */
     public function callbackAction()
     {
+        $state = $this->request->get('state');
+
+        if (! $state) {
+            return $this->response->redirect('/');
+        }
+
+        $this->session->set('FBRLH_state', $state);
+
     	$access_token = $this->facebookService->getAccessTokenFromCallback();
     	if(! $access_token) {
     		return $this->response->redirect('/');

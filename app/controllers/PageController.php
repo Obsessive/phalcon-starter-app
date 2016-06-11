@@ -33,6 +33,6 @@ class PageController extends ControllerBase
 
         $pageDetails = $this->facebookService->getPageDetails($page);
 
-        
+        echo json_encode($pageDetails->asArray());        
     }
 }
