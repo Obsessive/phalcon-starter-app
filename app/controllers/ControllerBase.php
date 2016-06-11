@@ -27,7 +27,7 @@ class ControllerBase extends Controller
 		}
 
 		if ( !$this->user && ($controller != IndexController::class) ) {
-			$this->response->redirect('/', false);
+			return $dispatcher->forward(['controller' => 'index', 'action' => 'notFound']);
 		}
 	}
 
