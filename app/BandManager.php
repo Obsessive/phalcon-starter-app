@@ -47,6 +47,14 @@ class BandManager {
         $this->di->get('app.services.migration')->init();
     }
 
+    /**
+     * Runs all new migrations from /db/migrations folder
+     */
+    public function migrate()
+    {
+        $this->di->get('app.services.migration')->migrate();
+    }
+
 	public function run()
 	{
 		try {

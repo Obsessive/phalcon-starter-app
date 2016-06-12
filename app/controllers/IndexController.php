@@ -30,6 +30,9 @@ class IndexController extends ControllerBase
     	return $this->response->redirect('/', false);
     }
 
+    /**
+     * General not found action
+     */
     public function notFoundAction()
     {
     	return $this->response->redirect('/');

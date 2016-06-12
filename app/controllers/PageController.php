@@ -18,21 +18,33 @@ class PageController extends ControllerBase
     	$pageNodes = $this->facebookService->getUserPages();
 
     	if( $this->pageRepository->updatePagesForUser($pageNodes, $this->user->id) ) {
-    		return $this->response->redirect('/app/pages');
+
+            foreach ($this->user->pages as $page) {
+                $graphPage = $this->facebookService->getPageData($page->facebook_page_id);
+                $this->pageRepository->updatePageProfile($page->id, $graphPage);
+            }
+
+            $this->flashSession->success($this->user->profile->first_name .", your bands are updated.");
+    		return $this->response->redirect('/app');
     	}
 
     	return $this->response->redirect('/');
     }
 
-    public function pageDetailsAction($pageId)
+    public function eventsAction()
     {
+        $pageId = $this->request->get('pageId');
+
         $page = $this->user->checkPageAccess($pageId);
         if(! $page) {
-            return $this->response->redirect('/app/pages');
+            return null;
         }
 
-        $pageDetails = $this->facebookService->getPageDetails($page);
+        $events = $this->facebookService->getPageEvents($page->facebook_page_id);
 
-        echo json_encode($pageDetails->asArray());        
+        if ($events) {
+            echo json_encode($events->asArray());
+        }
     }
+
 }

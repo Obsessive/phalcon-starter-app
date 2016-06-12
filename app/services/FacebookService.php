@@ -64,7 +64,7 @@ class FacebookService
      */
     public function getLoginUrl()
     {
-        $perms = ['manage_pages'];
+        $perms = ['user_location', 'manage_pages'];
         $callback = $this->config->application->host.'/auth/callback';
 
         return $this->fb->getRedirectLoginHelper()
@@ -98,7 +98,7 @@ class FacebookService
         }
 
         try {
-            return $this->fb->get('/me?fields=name,picture.type(large)', $access_token)->getGraphUser();
+            return $this->fb->get('/me?fields=name,first_name,last_name,email,location,picture.type(large),cover.type(large)', $access_token)->getGraphUser();
                
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
@@ -126,15 +126,26 @@ class FacebookService
     /**
      * Get basic page details from Facebook
      */
-    public function getPageDetails($page)
+    public function getPageData($facebookPageId)
     {
         try {
-            $query = '/'.$page->facebook_page_id.'?fields=name,about,genre,bio,picture,band_members,influences';
+            $query = '/'.$facebookPageId.'?fields=id,picture.type(large),cover.type(large),likes,genre,category';
             return $this->fb->get($query)->getGraphPage();
                
         } catch (\Exception $e) {
            $this->handleError($e);
         }
+    }
+
+    public function getPageEvents($facebookPageId)
+    {
+        try {
+            $query = '/'.$facebookPageId.'?fields=events';
+            return $this->fb->get($query)->getGraphNode();
+               
+        } catch (\Exception $e) {
+           $this->handleError($e);
+        }   
     }
 
     public function handleError(\Exception $e)

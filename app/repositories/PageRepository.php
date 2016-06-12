@@ -4,7 +4,9 @@ namespace app\repositories;
 
 use app\models\UserPages;
 use app\models\Page;
+use app\models\PageProfile;
 use Facebook\GraphNodes\GraphEdge;
+use Facebook\GraphNodes\GraphPage;
 
 class PageRepository extends Repository
 {
@@ -80,5 +82,46 @@ class PageRepository extends Repository
         }
 
         return true;
+    }
+
+    /**
+     * Update pageProfile data
+     *
+     * @param string $pageId
+     */
+    public function updatePageProfile($pageId, GraphPage $page)
+    {
+        if ($page->getCategory() != 'Musician/Band') {
+            return;
+        }
+
+        $pageProfile = PageProfile::findFirst('page_id='.$pageId);
+
+        if (! $pageProfile) {
+            $pageProfile = new PageProfile;
+        }
+
+        $pageProfile->page_id = $pageId;
+        $pageProfile->picture = $page->getField('picture')['url'];
+        $pageProfile->cover = $page->getField('cover')['source'];
+        $pageProfile->genre = $page->getField('genre');
+
+        if (! $pageProfile->save()) {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    /**
+     * Get all admins for page
+     */
+    public function getPageAdmins($pageId)
+    {
+        $page = $this->findFirstBy([ 'id' => $pageId ]);
+        $pageAdmins = $page->admins;
+
+        return $pageAdmins;
     }
 }

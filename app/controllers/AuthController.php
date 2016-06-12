@@ -39,10 +39,18 @@ class AuthController extends ControllerBase
     	$user = $this->userRepository->findFirstBy(['facebook_id' => $userNode->getId()]);
     	if (! $user) {
     		$user = $this->userRepository->createFromUserNode($userNode);
-    	}
+
+            if($user) {
+    	       $this->flashSession->success($user->profile->first_name .", welcome to BandManager!");
+            }
+        }
+        else {
+            $this->flashSession->success($user->profile->first_name .", welcome back!");
+        }
 
     	$this->userService->setUser($user);
-    	return $this->response->redirect('/app');
+    	
+        return $this->response->redirect('/app');
     }
     
 }

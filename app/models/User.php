@@ -48,7 +48,7 @@ class User extends Model
      */
     public function checkPageAccess($pageId)
     {
-        $userPage = UserPages::findFirst('page_id='.$pageId);
+        $userPage = UserPages::findFirst('page_id='.$pageId.' AND user_id='.$this->id);
 
         if ( $userPage && ($userPage->user_id == $this->id) ) {
             return $userPage->page;

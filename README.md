@@ -18,3 +18,7 @@ php db\init.php
 #### Phalcon official website:
 
 > https://phalconphp.com/en/
+
+#### UI template created by: [Creative Tim](http://www.creative-tim.com/)
+
+> http://www.creative-tim.com/product/paper-dashboard

@@ -9,7 +9,6 @@ use	Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use	Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use	Phalcon\Session\Adapter\Files as SessionAdapter;
 
-
 $this->di->setShared('config', function () {
     return new Config(require __DIR__ . '/config.php');
 });

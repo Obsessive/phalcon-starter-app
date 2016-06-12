@@ -18,12 +18,25 @@ class UserRepository extends Repository
     	$user->facebook_id = $userNode->getId();
     	$user->name = $userNode->getName();
 
-    	if ($user->save()) {
+    	if ( $user->save() ) {
 
     		$userProfile = new UserProfile;
     		$userProfile->user_id = $user->id;
     		$userProfile->picture = $userNode->getPicture()->getUrl();
-    		$userProfile->save();
+            $userProfile->first_name = $userNode->getFirstName();
+            $userProfile->last_name = $userNode->getLastName();
+            $userProfile->cover = $userNode->getField('cover')['source'];
+            $userProfile->email = $userNode->getEmail();
+
+            if ($userNode->getLocation()) {
+                $userProfile->location = $userNode->getLocation()->getName();
+            }
+
+            if ( UserProfile::findFirst("email='".$userNode->getEmail()."'") ) {
+                $userProfile->email = null;
+            }
+
+            $userProfile->save();
 
     		return $user;
     	}

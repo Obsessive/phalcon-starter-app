@@ -23,7 +23,8 @@ class Page extends Model
 
     public function initialize()
     {
-        $this->hasMany("id","app\\models\\User","user_id");
+        $this->hasOne("id","app\\models\\PageProfile","page_id", array('alias' => 'profile'));
+        $this->hasManyToMany("id","app\\models\\UserPages","page_id", "user_id", "app\\models\\User", "id", array('alias' => 'admins'));
     }
 
     /**

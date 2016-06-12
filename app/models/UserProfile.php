@@ -27,6 +27,31 @@ class UserProfile extends Model
     public $email;
 
     /**
+     * @var string
+     */
+    public $first_name;
+
+    /**
+     * @var string
+     */
+    public $last_name;
+
+    /**
+     * @var string
+     */
+    public $location;
+
+    /**
+     * @var string
+     */
+    public $about;
+
+    /**
+     * @var string
+     */
+    public $cover;    
+
+    /**
      * Returns the table name.
      *
      * @return string

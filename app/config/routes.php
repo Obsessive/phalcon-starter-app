@@ -17,8 +17,10 @@ return call_user_func(
 
        $router->addGet('/app', $p . 'App::index');
        $router->addGet('/app/pages', $p . 'App::pages');
+       $router->addGet('/app/pages/{pageId}', $p . 'App::page');
+
        $router->addGet('/app/pages/update', $p . 'Page::updatePages');
-       $router->addGet('/app/page/{pageId}', $p . 'Page::pageDetails');
+       $router->addPost('/app/page/events', $p . 'Page::events');
 
         $router->notFound(['controller' => 'index', 'action' => 'notFound']);
 
