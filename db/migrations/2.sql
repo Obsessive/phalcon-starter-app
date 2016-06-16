@@ -8,3 +8,5 @@ CREATE TABLE page_profile (
   PRIMARY KEY (id),
   FOREIGN KEY (page_id) REFERENCES pages(id)
 );
+
+INSERT migrations (num) VALUES (2);
