@@ -1,6 +1,6 @@
 ## Phalcon Starter App
 
-> My personal app development
+(My personal app development)
 
 #### Live development version:
 
