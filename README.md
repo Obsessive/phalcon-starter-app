@@ -2,6 +2,10 @@
 
 > My personal app development
 
+#### Live development version:
+
+> http://phalcon.vfdesign.org/
+
 - Copy sample config file:
 
 ```
