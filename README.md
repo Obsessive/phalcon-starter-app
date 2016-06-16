@@ -2,7 +2,7 @@
 
 (My personal app development)
 
-#### Live development version:
+#### Live dev version:
 
 > http://phalcon.vfdesign.org/
 
