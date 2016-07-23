@@ -11,8 +11,7 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
-
-    <!-- Bootstrap core CSS     -->
+    <!-- Bootstrap core CSS     --> 
     <link href="{{ url('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
@@ -27,7 +26,7 @@
     <link href="{{ url('assets/css/themify-icons.css') }}" rel="stylesheet">
 
 </head>
-<body>
+<body ng-app="bandmanagerApp">
 
 <div class="wrapper">
     <div class="sidebar" data-background-color="black" data-active-color="danger">
@@ -46,39 +45,21 @@
 
             <ul class="nav">
                 <li>
-                    <a href="/app">
+                    <a href="/dashboard">
                         <i class="ti-user"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
-                    <a href="/app/pages">
+                    <a href="/bands">
                         <i class="ti-view-list-alt"></i>
                         <p>My bands</p>
                     </a>
                 </li>
                 <li>
-                    <a href="/app/rehersals">
+                    <a href="/rehersals">
                         <i class="ti-loop"></i>
                         <p>Rehersals</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/app">
-                        <i class="ti-pencil-alt2"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="maps.html">
-                        <i class="ti-map"></i>
-                        <p>Maps</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="notifications.html">
-                        <i class="ti-bell"></i>
-                        <p>Notifications</p>
                     </a>
                 </li>
             </ul>
@@ -140,26 +121,20 @@
             <div class="container-fluid">
                 <nav class="pull-left">
                     <ul>
-
                         <li>
-                            <a href="http://www.creative-tim.com">
-                                Creative Tim
+                            <a href="/">
+                               Support
                             </a>
                         </li>
                         <li>
-                            <a href="http://blog.creative-tim.com">
-                               Blog
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://www.creative-tim.com/license">
-                                Licenses
+                            <a href="/">
+                                FAQ
                             </a>
                         </li>
                     </ul>
                 </nav>
                 <div class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>
+                    <a href="/">BandManager</a>&nbsp;&copy; <script>document.write(new Date().getFullYear())</script>
                 </div>
             </div>
         </footer>
@@ -183,8 +158,12 @@
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
     <script src="{{ url('assets/js/paper-dashboard.js') }}"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+
     <!-- Custom scripts -->
-    <script src="{{ url('assets/js/app/page.js') }}" type="text/javascript"></script>
+    <script src="{{ url('assets/js/app/main.js') }}"></script>
+
+<!--     <script src="{{ url('assets/js/app/page.js') }}"></script> -->
 
     <?php
     $messages = $this->flashSession->getMessages();

@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Phalcon\Mvc\Model;
-use app\models\UserPages;
 
 class User extends Model
 {

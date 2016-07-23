@@ -1,11 +1,11 @@
-{% extends 'app/partials/layout.volt' %}
+{% extends 'layout.volt' %}
 
 {% block title %}{{ page.name }}{% endblock %}
 
 {% block content %}
 
 
-<div class="content">
+<div class="content" ng-controller="bandCtrl">
     <div class="container-fluid">
     	<div class="row">
 
@@ -72,9 +72,14 @@
 					<div class="header">
 						<h4 class="title">Events</h4>
 					</div>
+					<hr>
 					<div class="content">
-						<ul id="events" class="list-unstyled team-members">
-							{# Ajax #}
+						<ul ng-model="events" class="list-unstyled team-members">
+							<li ng-repeat="event in events">
+								<h6 class="text-right">{( event.start_time.date )} | {( event.place.location.city )}</h6>
+								<h4>{( event.name )}</h4>
+								<p>{( event.description )}</p>
+							</li>
 						</ul>
 					</div>
 				</div>

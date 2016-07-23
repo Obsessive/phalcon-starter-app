@@ -15,7 +15,7 @@ class IndexController extends ControllerBase
     public function indexAction()
     {
     	if ($this->user) {
-    		return $this->response->redirect('/app');
+    		return $this->response->redirect('/dashboard');
     	}
 
     	$this->view->url = $this->facebookService->getLoginUrl();

@@ -1,4 +1,4 @@
-{% extends 'app/partials/layout.volt' %}
+{% extends 'layout.volt' %}
 
 {% block title %}My bands{% endblock %}
 
@@ -23,7 +23,7 @@
                                 {% for page in pages %}
                                 <tr>
                                     <td>{{ page.facebook_page_id }}</td>
-                                    <td><a href="/app/pages/{{ page.id }}">{{ page.name }}</a></td>
+                                    <td><a href="/bands/{{ page.id }}">{{ page.name }}</a></td>
                                     <td>{{ page.profile.genre }}</td>
                                 </tr>
                                 {% endfor %}
@@ -39,10 +39,10 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="typo-line">
-                <h2><p class="category">Whoops !</p>No bands found.</h2>
+            <div class="typo-line text-center">
+                <h4><p class="category">Whoops !</p>No bands found.</h4>
                 <hr>
-                <a class="btn btn-info btn-fill btn-wd" href="/app/pages/update">Update</a>
+                <a class="btn btn-info btn-fill btn-wd" href="/bands/update">Update</a>
             </div>
         </div>
     </div>

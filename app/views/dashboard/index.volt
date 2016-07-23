@@ -1,4 +1,4 @@
-{% extends 'app/partials/layout.volt' %}
+{% extends 'layout.volt' %}
 
 {% block title %}Dashboard{% endblock %}
 
@@ -94,7 +94,7 @@
                             <div class="footer">
                                 <hr />
                                 <div class="stats">
-                                    <a href="app/pages/update">
+                                    <a href="bands/update">
                                         <i class="ti-reload"></i> Update now
                                     </a>
                                 </div>

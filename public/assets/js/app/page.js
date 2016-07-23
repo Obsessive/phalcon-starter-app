@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	var pathName = window.location.pathname;
-	var pattern = /\/app\/pages\/\d/;
+	var pattern = /\/page\/\d/;
 
 	if (pattern.test(pathName)) {
 
@@ -18,7 +18,7 @@ $(document).ready(function() {
 
 		$.ajax({
 			type: 'POST',
-			url: '/app/page/events',
+			url: '/page/events',
 			data: { 
 				pageId: pageId
 			}

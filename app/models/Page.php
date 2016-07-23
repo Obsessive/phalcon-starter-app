@@ -24,6 +24,7 @@ class Page extends Model
     public function initialize()
     {
         $this->hasOne("id","app\\models\\PageProfile","page_id", array('alias' => 'profile'));
+        $this->hasMany("id","app\\models\\Rehersals","page_id", array('alias' => 'rehersals'));
         $this->hasManyToMany("id","app\\models\\UserPages","page_id", "user_id", "app\\models\\User", "id", array('alias' => 'admins'));
     }
 

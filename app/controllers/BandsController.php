@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-class PageController extends ControllerBase
+class BandsController extends ControllerBase
 {
 	public function onConstruct()
 	{
@@ -11,9 +11,44 @@ class PageController extends ControllerBase
 	}
 
     /**
+     * Showing table with all bands for user
+     */
+    public function indexAction()
+    {
+        $pages = $this->user->pages;
+
+        if ($pages->count() == 0) {
+            $this->flashSession->success($this->user->profile->first_name .", you don`t have any band pages.");
+        }
+
+        $this->view->pages = $pages;
+    }
+
+    /**
+     * Show single band page details
+     * 
+     * @param $pageId
+     */
+    public function bandDetailsAction($pageId)
+    {
+        $page = $this->user->checkPageAccess($pageId);
+        if(! $page) {
+            return $this->response->redirect('/bands');
+        }
+
+        $pageAdmins = $this->pageRepository->getPageAdmins($pageId);
+
+        $this->view->user = $this->user;
+        $this->view->page = $page;
+        $this->view->admins = $pageAdmins;
+    }
+
+
+
+    /**
      * Update pages data for given Facebook pages and user
      */
-    public function updatePagesAction()
+    public function updateBandsAction()
     {
     	$pageNodes = $this->facebookService->getUserPages();
 
@@ -25,15 +60,17 @@ class PageController extends ControllerBase
             }
 
             $this->flashSession->success($this->user->profile->first_name .", your bands are updated.");
-    		return $this->response->redirect('/app');
+    		return $this->response->redirect('/dashboard');
     	}
 
     	return $this->response->redirect('/');
     }
 
     public function eventsAction()
-    {
-        $pageId = $this->request->get('pageId');
+    { 
+        $postdata = file_get_contents("php://input");
+        $request = json_decode($postdata);
+        $pageId = $request->pageId;
 
         $page = $this->user->checkPageAccess($pageId);
         if(! $page) {

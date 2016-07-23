@@ -34,7 +34,7 @@ class MigrationService
             return;
         }
 
-        echo 'Initial database tables are successfully created.';
+        echo 'Initial database tables are successfully created.' . PHP_EOL;
     }
 
     /**
