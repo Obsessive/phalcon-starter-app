@@ -113,7 +113,7 @@
             </div>
         </nav>
 
-        <div class="animated fadeIn">
+        <div class="animated fadeIn" style="padding: 0.5em">
             {% block content %}{% endblock %}
         </div>
 
