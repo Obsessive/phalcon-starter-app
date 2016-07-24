@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -26,7 +26,7 @@
     <link href="{{ url('assets/css/themify-icons.css') }}" rel="stylesheet">
 
 </head>
-<body ng-app="bandmanagerApp">
+<body ng-app="BandManagerApp">
 
 <div class="wrapper">
     <div class="sidebar" data-background-color="black" data-active-color="danger">
@@ -113,9 +113,9 @@
             </div>
         </nav>
 
-
-        {% block content %}{% endblock %}
-
+        <div class="animated fadeIn">
+            {% block content %}{% endblock %}
+        </div>
 
         <footer class="footer">
             <div class="container-fluid">
@@ -160,10 +160,11 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 
+    <!-- Dependencies -->
+    <script src="http://momentjs.com/downloads/moment.min.js"></script>
+
     <!-- Custom scripts -->
     <script src="{{ url('assets/js/app/main.js') }}"></script>
-
-<!--     <script src="{{ url('assets/js/app/page.js') }}"></script> -->
 
     <?php
     $messages = $this->flashSession->getMessages();

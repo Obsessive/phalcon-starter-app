@@ -31,4 +31,15 @@ class ControllerBase extends Controller
 		}
 	}
 
+    protected function jsonResponse($content, $code)
+    {
+    	if ($code == 0) {
+	 		return json_encode([ 'error' => $content, 'code' => $code ]);    		
+    	}
+    	if ($code == 1) {
+     		return json_encode([ 'success' => $content, 'code' => $code ]);
+    	}
+
+    	return json_encode($content);
+ 	}
 }

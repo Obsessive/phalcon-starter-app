@@ -35,6 +35,7 @@ return call_user_func(
        * Rehersals
        */
       $router->addGet('/rehersals', $p . 'Rehersals::index');
+      $router->addPost('/rehersals/add', $p . 'Rehersals::add');
 
       $router->notFound(['controller' => 'index', 'action' => 'notFound']);
 

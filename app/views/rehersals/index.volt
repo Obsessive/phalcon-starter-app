@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div class="content">
+<div class="content" ng-controller="rehersalsCtrl">
     <div class="container-fluid">
 
 		{% if bands|length == 0 %}
@@ -86,33 +86,36 @@
                                 <div class="form-group">
                                     <label>Band</label>
                                     <select class="form-control border-input">
-                                    	<option>Made In Iron</option>
-                                    	<option>In Roots</option>
+                                    	{% for band in bands %}
+                                    		<option value="{{ band.id }}">
+                                    			{{ band.name }}
+                                    		</option>
+                                    	{% endfor %}
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Location</label>
-                                    <input type="text" class="form-control border-input" placeholder="Location" />
+                                    <input ng-model="location" type="text" class="form-control border-input" placeholder="Location..." />
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Date/Time</label>
-                                   <input type="text" class="form-control border-input" placeholder="City" />
+                                   	<input ng-model="dateTime" type="datetime-local" class="form-control border-input" />
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Note</label>
-                                    <textarea rows="5" class="form-control border-input" placeholder="Some note..."></textarea>
+                                    <textarea ng-model="note" rows="5" class="form-control border-input" placeholder="Add a note for your bandmates..."></textarea>
                                 </div>
                             </div>
                      	</div>
                         <hr>                               
                         <div class="text-center">
-                            <button type="submit" class="btn btn-info btn-fill btn-wd">Add</button>
+                            <button ng-click="addRehersal()" class="btn btn-info btn-fill btn-wd">Add</button>
                         </div>
                     </form>
                 </div>

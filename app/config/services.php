@@ -86,6 +86,10 @@ $this->di->setShared('app.repositories.page', function() {
     return new app\repositories\PageRepository();
 });
 
+$this->di->setShared('app.repositories.rehersals', function() {
+    return new app\repositories\RehersalsRepository();
+});
+
 /* Services */
 $this->di->setShared('app.services.migration', function() {
     return new app\services\MigrationService( $this->di->get('db') );

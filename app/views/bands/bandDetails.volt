@@ -73,10 +73,11 @@
 						<h4 class="title">Events</h4>
 					</div>
 					<hr>
-					<div class="content">
+					<div id="eventsList" class="content hidden">
 						<ul ng-model="events" class="list-unstyled team-members">
 							<li ng-repeat="event in events">
-								<h6 class="text-right">{( event.start_time.date )} | {( event.place.location.city )}</h6>
+								<small>{( event.start_time.date )}</small>
+								<h6>{( event.place.location.city )}</h6>
 								<h4>{( event.name )}</h4>
 								<p>{( event.description )}</p>
 							</li>
