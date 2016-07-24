@@ -38,7 +38,7 @@
 
         <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://phalcon.dev" class="simple-text">
+                <a href="/" class="simple-text">
                     BandManager
                 </a>
             </div>
