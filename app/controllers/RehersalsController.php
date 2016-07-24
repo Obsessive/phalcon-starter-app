@@ -9,6 +9,7 @@ class RehersalsController extends ControllerBase
 	public function onConstruct()
 	{
 		$this->rehersalsRepository = $this->di->get('app.repositories.rehersals');
+		$this->plivoService = $this->di->get('app.services.plivo');
 	}
 
     public function indexAction()
@@ -38,7 +39,9 @@ class RehersalsController extends ControllerBase
         }
 
         $rehersal->save();
-        $this->flashSession->success('New rehersal for ' . $rehersal->page->name . ' created.');
+        $this->flashSession->success('New rehersal created for ' . $rehersal->page->name);
+
+        $this->plivoService->sendRehersalSms($rehersal);
     }
 
 }

@@ -5,6 +5,7 @@
         }
     },
     "require": {
-        "facebook/php-sdk-v4": "^5.2"
+        "facebook/php-sdk-v4": "^5.2",
+        "plivo/plivo-php": "^1.1"
     }
 }

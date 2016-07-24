@@ -1,4 +1,3 @@
 /.phalcon
 /vendor
-/public/bower_components
 /app/config/config.php

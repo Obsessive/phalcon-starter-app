@@ -28,16 +28,29 @@ function($scope, $http) {
 		var eventsPromise = $http(params);
 		
 		eventsPromise
-			.then(function(response) {
+			.then(function success(response) {
 				$scope.events = response.data.events;
+
+				console.log($scope.events);
+				if (! $scope.events) {
+					$.notify("No events found.");
+					return;
+				}
 
 				angular.forEach($scope.events, function(ev, key){
 					$scope.events[key].start_time.date = moment(ev.start_time.date).format('LLLL');
 				});
 
 				angular.element('#eventsList').removeClass('hidden');
-				angular.element('#eventsList').addClass('animated slideInUp');
+				angular.element('#eventsList').addClass('animated flipInY');
+
+			}, function err(response) {
+				$.notify('Whoops...An error occured while fetching band events from Facebook.');
 			});
+	};
+
+	$scope.hideShowDescription = function(event) {
+		angular.element('#descr-' + event.id).toggleClass('hidden');
 	};
 
 	$scope.init();
@@ -86,16 +99,16 @@ function($scope, $http) {
 		var rehersalPromise = $http(params);
 
 		rehersalPromise
-			.then(function(response) {
-				var data = response.data;
-				console.log(data);
+			.then(function success(response) {
 				
-				if (data.code == 0) {
-					$.notify(data.error);
-				}
-				else {
+				var data = response.data;
+				if (data.code == 0)
+					$.notify(data.errorMsg);
+				else
 					window.location.reload();
-				}
+
+			}, function err(response) {
+				$.notify('Whoops...An error occured, sorry. Please, try again.');
 			});
 
 	};

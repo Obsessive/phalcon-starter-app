@@ -105,9 +105,19 @@ $this->di->setShared('app.services.facebook', function() {
     return new app\services\FacebookService( $facebook, $this->di->get('config'), $this->di->get('app.log.error'), $this->di->get('app.services.user'), $this->di->get('session') );
 });
 
+$this->di->setShared('app.services.plivo', function () {
+    $plivo = new Plivo\RestAPI( $this->di->get('config')->plivo->auth_id, $this->di->get('config')->plivo->auth_token );
+    return new \app\services\PlivoService( $plivo, $this->di->get('app.repositories.page'), $this->di->get('app.services.user'), $this->di->get('app.log.plivo') );
+});
+
 
 /* Logging */
 $this->di->setShared('app.log.error', function() {
-        $logger = new \Phalcon\Logger\Adapter\File(APP_ROOT.'/logs/'.'error_log-'.date('Y-m-d').'.log');
-        return $logger;
+    $logger = new \Phalcon\Logger\Adapter\File(APP_ROOT.'/logs/'.'error_log-'.date('Y-m-d').'.log');
+    return $logger;
+});
+
+$this->di->setShared('app.log.plivo', function() {
+    $logger = new \Phalcon\Logger\Adapter\File(APP_ROOT.'/logs/'.'plivo_log-'.date('Y-m-d').'.log');
+    return $logger;
 });

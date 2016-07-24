@@ -77,9 +77,11 @@
 						<ul ng-model="events" class="list-unstyled team-members">
 							<li ng-repeat="event in events">
 								<small>{( event.start_time.date )}</small>
-								<h6>{( event.place.location.city )}</h6>
-								<h4>{( event.name )}</h4>
-								<p>{( event.description )}</p>
+								<h6>{( event.place.location.city )}<b ng-if="event.place.location.street">, | {( event.place.location.street )}</b></h6>
+								<h5>
+									<a ng-click="hideShowDescription(event)">{( event.name )}</a>
+								</h5>
+								<p id="descr-{( event.id )}" class="hidden">{( event.description )}</p>
 							</li>
 						</ul>
 					</div>

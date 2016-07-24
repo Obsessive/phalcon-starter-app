@@ -25,6 +25,8 @@
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="{{ url('assets/css/themify-icons.css') }}" rel="stylesheet">
 
+    <!-- Custom -->
+    <link href="{{ url('assets/css/custom.css') }}" rel="stylesheet">
 </head>
 <body ng-app="BandManagerApp">
 

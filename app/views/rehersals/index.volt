@@ -23,7 +23,7 @@
 					<div class="content">
 						<ul class="list-unstyled team-members">
 							{% for band in bands %}
-							<li>
+							<li style="border-bottom: 1px solid #bbb">
 
 								<div class="row">
 									<div class="col-xs-6">
@@ -32,7 +32,7 @@
 										</div>
 									</div>
 									<div class="col-xs-6">
-										<h5>{{ band.name }}</h5>
+										<h5 class="text-right">{{ band.name }}</h5>
 									</div>
 								</div>
 
@@ -77,7 +77,7 @@
 
             <div class="card col-md-4">
                 <div class="header">
-                    <h4 class="title">Add rehersal</h4>
+                    <h4 class="title">Add new rehersal</h4>
                 </div>
                 <div class="content">
                     <form class="form">

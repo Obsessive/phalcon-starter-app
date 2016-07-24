@@ -49,8 +49,13 @@ class UserProfile extends Model
     /**
      * @var string
      */
-    public $cover;    
+    public $cover;
 
+    /**
+     * @var string
+     */
+    public $number;
+    
     /**
      * Returns the table name.
      *
