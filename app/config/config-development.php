@@ -29,5 +29,8 @@ return [
     'plivo' => [
         'auth_id'               => 'PLIVO_AUTH_ID',
         'auth_token'            => 'PLIVO_AUTH_TOKEN',
+    ],
+    'google' => [
+        'api_key'   => 'GOOGLE_API_KEY'
     ]
 ];

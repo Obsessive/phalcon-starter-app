@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Dispatcher;
+use Phalcon\Http\Request;
 use Facebook\Facebook;
 
 class ControllerBase extends Controller
@@ -15,6 +16,8 @@ class ControllerBase extends Controller
 
 	public function beforeExecuteRoute(Dispatcher $dispatcher)
 	{
+		$this->logRequest();
+
 		$userService = $this->di->get('app.services.user');
 
 		$controller = $dispatcher->getControllerClass();
@@ -31,15 +34,29 @@ class ControllerBase extends Controller
 		}
 	}
 
-    protected function jsonResponse($content, $code)
+    protected function jsonResponse($content, $code = null)
     {
+		if(! $code) {
+	       	return json_encode($content);
+    	}
     	if ($code == 0) {
 	 		return json_encode([ 'errorMsg' => $content, 'code' => $code ]);
     	}
     	if ($code == 1) {
      		return json_encode([ 'successMsg' => $content, 'code' => $code ]);
     	}
+ 	}
 
-    	return json_encode($content);
+ 	public function logRequest()
+ 	{
+ 		$requestLog = $this->di->get('app.log.request');
+
+ 		$data = [
+ 			'uri' 		=> $this->request->getURI(),
+ 			'params' 	=> $this->request->get(),
+ 			'body'		=> $this->request->getJsonRawBody() 
+ 		];
+
+ 		$requestLog->info(json_encode($data));
  	}
 }

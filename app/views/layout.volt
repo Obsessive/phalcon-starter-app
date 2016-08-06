@@ -48,13 +48,13 @@
             <ul class="nav">
                 <li>
                     <a href="/dashboard">
-                        <i class="ti-user"></i>
+                        <i class="ti-home"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
                     <a href="/bands">
-                        <i class="ti-view-list-alt"></i>
+                        <i class="ti-music-alt"></i>
                         <p>My bands</p>
                     </a>
                 </li>
@@ -62,6 +62,12 @@
                     <a href="/rehersals">
                         <i class="ti-loop"></i>
                         <p>Rehersals</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/venues">
+                        <i class="ti-location-pin"></i>
+                        <p>Venues</p>
                     </a>
                 </li>
             </ul>
@@ -144,11 +150,8 @@
     </div>
 </div>
 
-
-</body>
-
     <!--   Core JS Files   -->
-    <script src="{{ url('assets/js/jquery-1.10.2.js') }}" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="{{ url('assets/js/bootstrap.min.js') }}" type="text/javascript"></script>
 
     <!--  Checkbox, Radio & Switch Plugins -->
@@ -161,8 +164,8 @@
     <script src="{{ url('assets/js/paper-dashboard.js') }}"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.9/angular-filter.min.js"></script>
 
-    <!-- Dependencies -->
     <script src="http://momentjs.com/downloads/moment.min.js"></script>
 
     <!-- Custom scripts -->
@@ -201,4 +204,6 @@
     <?php
     }
     ?>
+
+</body>
 </html>

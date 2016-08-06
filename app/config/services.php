@@ -121,3 +121,8 @@ $this->di->setShared('app.log.plivo', function() {
     $logger = new \Phalcon\Logger\Adapter\File(APP_ROOT.'/logs/'.'plivo_log-'.date('Y-m-d').'.log');
     return $logger;
 });
+
+$this->di->setShared('app.log.request', function() {
+    $logger = new \Phalcon\Logger\Adapter\File(APP_ROOT.'/logs/'.'request_log-'.date('Y-m-d').'.log');
+    return $logger;
+});

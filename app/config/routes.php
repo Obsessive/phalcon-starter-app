@@ -22,6 +22,7 @@ return call_user_func(
       * Dashboard
       */
       $router->addGet('/dashboard', $p . 'Dashboard::index');
+      $router->addPost('/dashboard/update_user', $p . 'Dashboard::updateUser');
 
      /**
       * Bands
@@ -36,6 +37,13 @@ return call_user_func(
        */
       $router->addGet('/rehersals', $p . 'Rehersals::index');
       $router->addPost('/rehersals/add', $p . 'Rehersals::add');
+
+      /**
+       * Venues
+       */
+      $router->addGet('/venues', $p . 'Venues::index');
+      $router->addGet('/venues/json', $p . 'Venues::venuesJson');
+      $router->addPost('/venues/details', $p . 'Venues::venueDetailsJson');
 
       $router->notFound(['controller' => 'index', 'action' => 'notFound']);
 

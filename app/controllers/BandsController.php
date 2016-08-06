@@ -60,12 +60,16 @@ class BandsController extends ControllerBase
             }
 
             $this->flashSession->success($this->user->profile->first_name .", your bands are updated.");
-    		return $this->response->redirect('/dashboard');
+    		return $this->response->redirect('/bands');
     	}
 
     	return $this->response->redirect('/');
     }
 
+    /**
+     * Get all events for band from Facebook API
+     * Used in AJAX request
+     */
     public function eventsAction()
     { 
         $postdata = file_get_contents("php://input");

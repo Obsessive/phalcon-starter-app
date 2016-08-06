@@ -1,10 +1,58 @@
-var app = angular.module('BandManagerApp', []);
+
+var app = angular.module('BandManagerApp', ['angular.filter']);
 
 app.config(['$interpolateProvider', '$httpProvider', 
 function($interpolateProvider, $httpProvider) {
 	$interpolateProvider.startSymbol('{(').endSymbol(')}');
 	$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 }]);
+
+
+// Dashboard controller
+app.controller('dashboardCtrl', ['$scope', '$http', 
+function($scope, $http) {
+	
+	$scope.showHideEditProfileForm = function() {
+		angular.element('#edit-profile-form').toggleClass('hidden animated fadeInLeft');
+	};
+
+	$scope.updateProfile = function() {
+
+		if (!$scope.number || isNaN($scope.number)) {
+			$.notify('Phone number is required and it can contain only digits <br> (Example: 385951112222)');
+			return;
+		}
+
+		var data = {
+			name: $scope.name,
+			location: $scope.location,
+			email: $scope.email,
+			number: $scope.number
+		}
+
+		var params = {
+			method: 'POST',
+			url: '/dashboard/update_user',
+			data: data
+		};
+
+		var updateProfilePromise = $http(params);
+
+		updateProfilePromise
+			.then(function(response) {
+				if (data.code == 0) {
+					$.notify(data.errorMsg);
+				}
+				else {
+					window.location.reload();
+				}
+			}, function(error) {
+				$.notify('Whoops...An error occured');
+			});
+	};
+
+}]);
+
 
 // Band controller
 app.controller('bandCtrl', 
@@ -28,10 +76,9 @@ function($scope, $http) {
 		var eventsPromise = $http(params);
 		
 		eventsPromise
-			.then(function success(response) {
+			.then(function(response) {
 				$scope.events = response.data.events;
 
-				console.log($scope.events);
 				if (! $scope.events) {
 					$.notify("No events found.");
 					return;
@@ -44,13 +91,13 @@ function($scope, $http) {
 				angular.element('#eventsList').removeClass('hidden');
 				angular.element('#eventsList').addClass('animated flipInY');
 
-			}, function err(response) {
-				$.notify('Whoops...An error occured while fetching band events from Facebook.');
+			}, function(response) {
+				$.notify('Whoops...An error occured while fetching band events from Facebook');
 			});
 	};
 
 	$scope.hideShowDescription = function(event) {
-		angular.element('#descr-' + event.id).toggleClass('hidden');
+		angular.element('#descr-' + event.id).toggleClass('hidden animated flipInY');
 	};
 
 	$scope.init();
@@ -99,7 +146,7 @@ function($scope, $http) {
 		var rehersalPromise = $http(params);
 
 		rehersalPromise
-			.then(function success(response) {
+			.then(function(response) {
 				
 				var data = response.data;
 				if (data.code == 0)
@@ -107,10 +154,65 @@ function($scope, $http) {
 				else
 					window.location.reload();
 
-			}, function err(response) {
+			}, function(response) {
 				$.notify('Whoops...An error occured, sorry. Please, try again.');
 			});
 
 	};
+
+}]);
+
+// Venues controller
+app.controller('venuesCtrl', 
+['$scope', '$http', 
+function($scope, $http) {
+
+	$scope.venues = [];
+
+	$scope.getVenues = function() {
+
+		var venuesPromise = $http.get('/venues/json');
+		venuesPromise.
+			then(function(response) {
+				$scope.venues = response.data;
+			}, function(err) {
+				$.notify('Whoops...An error occured while loading venues, sorry.');
+			});
+	};
+
+	$scope.showHideVenuesForCountry = function(country) {
+		angular.element('#' + country).toggleClass('hidden animated fadeInLeft');
+	};
+
+	$scope.showVenueDetails = function(venue) {
+
+		angular.element('#countries').fadeOut();
+
+		var params = {
+			method: 'POST',
+			url: '/venues/details',
+			data: {
+				'place_id': venue.place_id
+			}
+		}
+
+		var venueDetailsPromise = $http(params);
+
+		venueDetailsPromise
+			.then(function(response) {
+				$scope.selectedVenueData = response.data.result;
+				angular.element('#venueDetails').fadeIn();
+			}, function(err) {
+				$.notify("Whoops...Error while loading venue data, sorry");
+			});
+	};
+
+	$scope.hideVenueDetails = function() {
+		angular.element('#venueDetails').fadeOut(function() {
+			angular.element('#countries').fadeIn();
+		});
+	};
+
+	$scope.getVenues();
 
 }]);

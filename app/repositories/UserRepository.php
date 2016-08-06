@@ -5,6 +5,7 @@ namespace app\repositories;
 use app\models\User;
 use app\models\UserProfile;
 use Facebook\GraphNodes\GraphUser;
+use Phalcon\Http\Request;
 
 class UserRepository extends Repository
 {
@@ -42,6 +43,32 @@ class UserRepository extends Repository
     	}
 
     	return null;
+    }
+
+    public function updateUserProfile(User $user, $name, $location, $email, $number)
+    {
+        $userProfile = $user->profile;
+
+        if ($location) {
+            $userProfile->location = $location;
+        }
+
+        if ($email) {
+            if (! $this->findFirstBy([ 'email' => $email ])) {
+                $userProfile->email = $email;
+            }
+        }
+
+        if ($number) {
+            $userProfile->number = $number;
+        }
+
+        if ($userProfile->save() && $name) {
+            $user->name = $name; 
+            return $user->save();
+        }
+
+        return false;
     }
 
 }

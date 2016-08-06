@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-md-8">
 
-				<div class="card">
+				<div class="card card-user">
 					<div class="content">
 						<ul class="list-unstyled team-members">
 							{% for band in bands %}

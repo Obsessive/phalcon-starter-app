@@ -9,26 +9,33 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-plain">
+                <div class="card card-user">
                     <div class="header">
                         <h4 class="title">List of your bands</h4>
+                        <br>
                     </div>
+
                     <div class="content table-responsive table-full-width">
-                        <table class="table table-hover">
-                            <thead>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Genre</th>
-                            <tbody>
-                                {% for page in pages %}
-                                <tr>
-                                    <td>{{ page.facebook_page_id }}</td>
-                                    <td><a href="/bands/{{ page.id }}">{{ page.name }}</a></td>
-                                    <td>{{ page.profile.genre }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                        <ul class="list-unstyled team-members list-group">
+                        {% for page in pages %}
+                            <a href="/bands/{{ page.id }}" class="list-group-item">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img class="avatar" src="{{ page.profile.picture }}" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h5>{{ page.name }}</h5>
+                                            <small>{{page.profile.genre }}</small>
+                                        </div>
+                                    </div>
+                                </li>
+                            </a>
+                        {% endfor %}
+
+
+                        </ul>
+                        
                     </div>
                 </div>
             </div>
