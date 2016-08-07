@@ -29,6 +29,10 @@ class ControllerBase extends Controller
 			return;
 		}
 
+		if (!$this->user && $controller == IndexController::class && $action == 'preview') {
+			return;
+		}
+
 		if ( !$this->user && ($controller != IndexController::class) ) {
 			return $dispatcher->forward(['controller' => 'index', 'action' => 'notFound']);
 		}

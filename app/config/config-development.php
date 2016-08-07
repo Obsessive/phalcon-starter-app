@@ -25,10 +25,11 @@ return [
     	'app_id'				=> 'APP_ID',
     	'app_secret'			=> 'APP_SECRET',
     	'default_graph_version' => 'v2.5',
+        'test_token'            => 'TEST_TOKEN'
     ],
     'plivo' => [
         'auth_id'               => 'PLIVO_AUTH_ID',
-        'auth_token'            => 'PLIVO_AUTH_TOKEN',
+        'auth_token'            => 'PLIVO_AUTH_TOKEN'
     ],
     'google' => [
         'api_key'   => 'GOOGLE_API_KEY'

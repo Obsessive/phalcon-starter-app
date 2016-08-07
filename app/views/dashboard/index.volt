@@ -20,15 +20,22 @@
                             <div class="content">
                                 <div class="author">
                                     <img class="avatar border-white" src="{{ user.profile.picture }}" />
-                                  <h4 class="title">{{ user.name }}<br />
+                                    <h4 class="title">{{ user.name }}</h4>
+                                    <br>
+                                    <small class="text-muted">Location</small>
+                                    <br>
+                                    <h6>{{ user.profile.location }}</h6>
                                     <hr>
-                                    <small>Registered: <i>{{ user.created_at }}</i></small>
-                                  </h4>
+                                    <small class="text-muted">Registered at</small>
+                                    <br>
+                                    <h6>{{ user.created_at }}</h6>
                                 </div>
+                                <br>
                                 <br>
                                 <div class="text-center">
                                     <button class="btn btn-info" ng-click="showHideEditProfileForm()">Edit profile</button>
                                 </div>
+                                <br>
                             </div>
                         </div>
                     </div>
@@ -63,7 +70,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Phone number</label>
-                                            <input required ng-model="number" type="text" class="form-control border-input" placeholder="{{ user.profile.number }}">
+                                            <input ng-model="number" type="text" class="form-control border-input" placeholder="{{ user.profile.number }}">
                                             <small>* Phone number is required for receiving mobile notifications about rehersals</small>
                                         </div>
                                     </div>   
@@ -163,8 +170,46 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
+                <div class="row">
+                    <div id="rehersal-details" class="modal col-md-12" hidden ng-model="selectedRehersal">     
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" ng-click="hideRehersalDetails()">&times;</button>
+                                <h6 class="modal-title text-success">Rehersal Details</h6>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card">
+                                    <div class="header">
+                                        <h6><small><b>Band</b></small></h6>
+                                        <br>
+                                        <h4 class="title">{( selectedRehersal.band.name )}</h4>
+                                        <hr>
+                                        <h6><small><b>Date/Time</b></small></h6>
+                                        <h5 class="category">{( selectedRehersal.rehersal.scheduled_at )}</h5>
+                                    </div>
+                                    <div class="content">
+                                        <h6><small><b>Location</b></small></h6>
+                                        <h5 class="category">{( selectedRehersal.rehersal.location )}</h5>
+                                        <hr>
+                                        <h6><small><b>Note</b></small></h6>
+                                        <h5 class="category text-primary">
+                                            <b>{( selectedRehersal.rehersal.note )}</b>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="title text-danger">Rehersals calendar</h5>
+                        <simple-calendar events="events" options="calendarOptions"></simple-calendar>
+                    </div>
+                </div>
+            </div>
             
         </div>
     </div>

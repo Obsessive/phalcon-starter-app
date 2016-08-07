@@ -70,22 +70,60 @@
 
 				<div class="card">
 					<div class="header">
-						<h4 class="title">Events</h4>
+						<h5 class="title">
+							<i class="ti-pin-alt"></i>
+							<a href="#eventsList" data-toggle="collapse">Band events</a>
+						</h5>
 					</div>
 					<hr>
-					<div id="eventsList" class="content hidden">
+					<div id="eventsList" class="content collapse">
 						<ul ng-model="events" class="list-unstyled team-members">
 							<li ng-repeat="event in events">
 								<small>{( event.start_time.date )}</small>
 								<h6>{( event.place.location.city )}<b ng-if="event.place.location.street">, | {( event.place.location.street )}</b></h6>
 								<h5>
-									<a ng-click="hideShowDescription(event)">{( event.name )}</a>
+									<small>
+										<a ng-click="hideShowDescription(event)">{( event.name )}</a>
+									</small>
 								</h5>
 								<p id="descr-{( event.id )}" class="hidden">{( event.description )}</p>
 							</li>
 						</ul>
 					</div>
 				</div>
+
+				<div class="card">
+					<div class="header">
+						<h5 class="title">
+							<i class="ti-pin-alt"></i>
+							<a href="#taggedPostsList" data-toggle="collapse">Band tagged posts</a>
+						</h5>
+					</div>
+					<hr>
+					<div id="taggedPostsList" class="content collapse">
+						<ul ng-model="tagged" class="list-unstyled team-members">
+							<li ng-repeat="post in tagged">
+								<div class="row">
+									<div class="col-md-12">
+									<h6 class="alert alert-info text-right text-muted">{( post.created_time )}</h6>
+									<br>
+									<img class="avatar border-white" src="{( post.picture )}" />
+									<br><br>
+									<small>{( post.message )}</small> 
+									<span>{( post.description )}</span>
+									<br><br>
+									</div>
+								</div>
+								<h6 class="text-center">
+									<a class="btn btn-info" href="{( post.permalink_url )}" target="_blank">
+										<small>View on Facebook</small>
+									</a>
+								</h6>
+							</li>
+						</ul>
+					</div>
+				</div>
+
 
             </div>
 

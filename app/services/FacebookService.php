@@ -148,6 +148,18 @@ class FacebookService
         }   
     }
 
+    public function getTaggedPosts($facebookPageId, $token)
+    {
+        try {
+            $query = '/'.$facebookPageId.'?fields=tagged{description,message,picture,permalink_url,created_time}';
+            return $this->fb->get($query)->getGraphNode();
+               
+        } catch (\Exception $e) {
+           $this->handleError($e);
+           return false;
+        } 
+    }
+
     public function handleError(\Exception $e)
     {
         $this->logger->error('Message: ' . $e->getMessage());

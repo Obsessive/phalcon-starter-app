@@ -1,5 +1,5 @@
 
-var app = angular.module('BandManagerApp', ['angular.filter']);
+var app = angular.module('BandManagerApp', ['angular.filter', '500tech.simple-calendar']);
 
 app.config(['$interpolateProvider', '$httpProvider', 
 function($interpolateProvider, $httpProvider) {
@@ -11,15 +11,70 @@ function($interpolateProvider, $httpProvider) {
 // Dashboard controller
 app.controller('dashboardCtrl', ['$scope', '$http', 
 function($scope, $http) {
-	
+
+	$scope.getRehersalsForCalendar = function() {
+
+		var params = {
+			method: 'GET',
+			url: '/dashboard/calendar'
+		};
+
+		var rehersalsPromise = $http(params);
+
+		rehersalsPromise
+			.then(function(response) {
+				console.log(response.data);
+				$scope.events = response.data;
+			}, function(err) {
+				$.notify('Error occured while generating calendar, sorry');
+			});
+
+	  $scope.calendarOptions = {
+	    minDate: new Date(),
+	    maxDate: new Date([2020, 12, 31]),
+	    dayNamesLength: 3, // How to display weekdays (1 for "M", 2 for "Mo", 3 for "Mon"; 9 will show full day names; default is 1)
+	    multiEventDates: true, // Set the calendar to render multiple events in the same day or only one event, default is false
+	    maxEventsPerDay: 1, // Set how many events should the calendar display before showing the 'More Events' message, default is 3;
+	    eventClick: $scope.eventClick,
+	    dateClick: $scope.dateClick
+	  };
+	};
+
+
+	$scope.eventClick = function(event) {
+
+		var params = {
+			method: 'POST',
+			url: '/rehersals/details',
+			data: { 
+				rehersal_id: event.event.id 
+			}
+		}
+		
+		var rehersalDetailsPromise = $http(params);
+		rehersalDetailsPromise
+			.then(function(response) {
+				$scope.selectedRehersal = response.data;
+				angular.element('#rehersal-details').fadeIn();
+			}, function(err) {
+				$.notify('We can`t display rehersal details at the moment, sorry');
+			});
+	};
+
+	$scope.dateClick = function(date) {};
+
 	$scope.showHideEditProfileForm = function() {
 		angular.element('#edit-profile-form').toggleClass('hidden animated fadeInLeft');
 	};
 
+	$scope.hideRehersalDetails = function() {
+		angular.element('#rehersal-details').fadeOut();
+	};
+
 	$scope.updateProfile = function() {
 
-		if (!$scope.number || isNaN($scope.number)) {
-			$.notify('Phone number is required and it can contain only digits <br> (Example: 385951112222)');
+		if ($scope.number && isNaN($scope.number)) {
+			$.notify('Phone number can contain only digits <br> (Example: 385951112222)');
 			return;
 		}
 
@@ -51,6 +106,8 @@ function($scope, $http) {
 			});
 	};
 
+	$scope.getRehersalsForCalendar();
+
 }]);
 
 
@@ -63,7 +120,8 @@ function($scope, $http) {
 
 	$scope.init = function() {
 		$scope.pageEvents();
-	};
+		$scope.taggedPosts();
+	}
 
 	$scope.pageEvents = function() {
 
@@ -88,12 +146,37 @@ function($scope, $http) {
 					$scope.events[key].start_time.date = moment(ev.start_time.date).format('LLLL');
 				});
 
-				angular.element('#eventsList').removeClass('hidden');
-				angular.element('#eventsList').addClass('animated flipInY');
-
 			}, function(response) {
 				$.notify('Whoops...An error occured while fetching band events from Facebook');
 			});
+	};
+
+	$scope.taggedPosts = function() {
+
+		var params = {
+			method: 'POST',
+			url: '/band/tagged',
+			data: { pageId: $scope.pageId }
+		};
+
+		var taggedPromise = $http(params);
+		taggedPromise
+			.then(function(response) {
+				
+				if (! response.data.tagged) {
+					$.notify(response.data.slice(1, -1));
+					return;
+				}
+				$scope.tagged = response.data.tagged;
+
+				angular.forEach($scope.tagged, function(post, key){
+					$scope.tagged[key].created_time = moment(post.created_time.date).format('LLLL');
+				});
+
+			}, function(err) {
+				$.notify('Whoops...An error occured, sorry');	
+			});
+
 	};
 
 	$scope.hideShowDescription = function(event) {
@@ -101,6 +184,7 @@ function($scope, $http) {
 	};
 
 	$scope.init();
+
 }]);
 
 
@@ -147,15 +231,14 @@ function($scope, $http) {
 
 		rehersalPromise
 			.then(function(response) {
-				
 				var data = response.data;
 				if (data.code == 0)
 					$.notify(data.errorMsg);
 				else
 					window.location.reload();
 
-			}, function(response) {
-				$.notify('Whoops...An error occured, sorry. Please, try again.');
+			}, function(err) {
+				$.notify('Whoops...An error occured, sorry');
 			});
 
 	};

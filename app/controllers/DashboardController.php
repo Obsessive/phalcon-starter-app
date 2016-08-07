@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Venue;
+use app\models\Rehersals;
 
 class DashboardController extends ControllerBase
 {
@@ -42,12 +43,33 @@ class DashboardController extends ControllerBase
             			   					   $request->number);
 
             if ($result) {
-            	echo $this->jsonResponse('Profile successfully updated', 1);
             	return;	
             }
 
         	echo $this->jsonResponse('Whoops...error occured while saving profile data', 0);
         }
+    }
+
+    /**
+     * Get rehersal events for angular calendar in dashboard
+     * Used in AJAX request
+     */
+    public function rehersalsForCalendarAction()
+    {
+    	$rehersals = Rehersals::find();
+
+    	$events = [];
+    	foreach ($rehersals as $rehersal) {
+    		$tmp = [
+    			'id' => $rehersal->id,
+    			'title' => '',
+    			'date' => $rehersal->scheduled_at
+    		];
+
+    		$events[] = $tmp;
+    	}
+
+    	return $this->response->setJsonContent($events);
     }
 
 }

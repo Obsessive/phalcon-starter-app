@@ -49,8 +49,8 @@ class AuthController extends ControllerBase
         }
 
     	$this->userService->setUser($user);
-    	
-        return $this->response->redirect('/app');
+    	   
+        return $this->response->redirect('/dashboard');
     }
-    
+
 }

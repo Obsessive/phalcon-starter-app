@@ -88,4 +88,31 @@ class BandsController extends ControllerBase
         }
     }
 
+    /**
+     * Get all tagged posts for band from Facebook API
+     * Used in AJAX request
+     */
+    public function taggedAction()
+    {
+
+        $postdata = file_get_contents("php://input");
+        $request = json_decode($postdata);
+        $pageId = $request->pageId;
+
+        $page = $this->user->checkPageAccess($pageId);
+        if(! $page) {
+            return null;
+        }
+
+        $token = $page->getPageTokenByUserId($this->user->id);
+        $taggedPosts = $this->facebookService->getTaggedPosts($page->facebook_page_id, $token);
+
+        if ($taggedPosts) {
+            echo $taggedPosts->asJson();
+        }
+        else {
+            echo $this->jsonResponse('We can`t currently display tagged posts, sorry', 0);
+        }
+    }
+
 }

@@ -24,7 +24,7 @@ class RehersalsController extends ControllerBase
     public function addAction()
     {
         if ($this->request->isPost()) {
-            
+
             $postdata = file_get_contents("php://input");
             $request = json_decode($postdata);
             
@@ -44,6 +44,35 @@ class RehersalsController extends ControllerBase
             $this->flashSession->success('New rehersal created for ' . $rehersal->page->name);
 
             $this->plivoService->sendRehersalSms($rehersal);
+        }
+    }
+
+    /**
+     * Get single rehersal details
+     * Used in AJAX request
+     */
+    public function rehersalDetailsAction()
+    {
+        if ($this->request->isPost()) {
+
+            $postdata = file_get_contents("php://input");
+            $request = json_decode($postdata);
+
+            $rehersal_id = $request->rehersal_id;            
+            $rehersal = $this->rehersalsRepository->findFirstBy([ 'id' => $request->rehersal_id ]);
+
+            if ($rehersal) {
+                
+                $result = [
+                    'rehersal'  => $rehersal->toArray(),
+                    'band'      => $rehersal->page->toArray()
+                ];
+
+                echo $this->jsonResponse($result);
+                return;
+            }
+
+            echo $this->jsonResponse('No rehersal found', 0);
         }
     }
 
