@@ -76,7 +76,7 @@
                                     </div>   
                                     <br>                           
                                     <div class="text-center">
-                                        <button ng-click="updateProfile()" type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>
+                                        <button ng-click="updateProfile()" type="button" class="btn btn-info btn-fill btn-wd">Update Profile</button>
                                     </div>
                                     <br>
                                 </form>

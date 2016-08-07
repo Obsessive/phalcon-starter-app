@@ -34,7 +34,7 @@ class DashboardController extends ControllerBase
             
             $postdata = file_get_contents("php://input");
             $request = json_decode($postdata);
-
+            
             $result = $this->userRepository
             			   ->updateUserProfile($this->user, 
             			   					   $request->name, 

@@ -54,7 +54,7 @@ class UserRepository extends Repository
         }
 
         if ($email) {
-            if (! $this->findFirstBy([ 'email' => $email ])) {
+            if (! UserProfile::findFirst("email='".$email."'")) {
                 $userProfile->email = $email;
             }
         }
@@ -63,12 +63,14 @@ class UserRepository extends Repository
             $userProfile->number = $number;
         }
 
-        if ($userProfile->save() && $name) {
+        $userProfile->save();
+
+        if ($name) {
             $user->name = $name; 
-            return $user->save();
+            $user->save();
         }
 
-        return false;
+        return true;
     }
 
 }
