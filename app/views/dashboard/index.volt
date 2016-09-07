@@ -109,7 +109,7 @@
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-
+                                        Review all of your bands
                                     </div>
                                 </div>
                             </div>
@@ -136,7 +136,7 @@
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-
+                                        Did you rehearsed lately?
                                     </div>
                                 </div>
                             </div>
@@ -163,7 +163,7 @@
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-
+                                        Explore various venues
                                     </div>
                                 </div>
                             </div>

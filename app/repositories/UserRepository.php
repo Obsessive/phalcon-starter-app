@@ -73,4 +73,9 @@ class UserRepository extends Repository
         return true;
     }
 
+    public function findAll()
+    {
+        return User::find();
+    }
+
 }

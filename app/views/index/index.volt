@@ -30,7 +30,7 @@
     <div class="container">
     	<div class="row">
     		<br>
-            <div class="col-md-12 jumbotron text-center animated fadeInDown">
+            <div class="col-md-12 jumbotron text-center animated flipInY">
             	<h2>
             		<i>Welcome To BandManager</i>
             		<br>
@@ -44,16 +44,19 @@
           	<div class="col-md-12">
           		<hr>
           	</div>
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-8 col-md-offset-2">
                 {# Login form #}
                 <div class="col-md-12 animated fadeInUp">
-                	<h6>You have test user credentials?</h6>
+                	<h6>You have admin or test user credentials?</h6>
                     <div id="login-form" class="card">
                         <div class="header">
-                            <h4 class="title">Test user login</h4>
+                            <h4 class="title">Admin/Test user login</h4>
                         </div>
-                        <div class="content">
-                            <form class="form" method="POST" action="/preview">
+                                 
+                        <div class="col-md-6">
+                            <br>
+                            <h5 class="text-center">TEST USER</h5>
+                            <form class="form" method="POST" action="/login">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Username</label>
@@ -73,6 +76,31 @@
                                 <br>
                             </form>
                         </div>
+
+                        <div class="col-md-6">
+                            <br>
+                            <h5 class="text-center">ADMIN</h5>
+                            <form class="form" method="POST" action="/admin">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Admin username</label>
+                                        <input name="username" type="text" class="form-control border-input" />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input name="password" type="password" class="form-control border-input" />
+                                    </div>
+                                </div>
+                                <br>                           
+                                <div class="text-center">
+                                    <input type="submit" class="btn btn-info btn-fill btn-wd" value="Admin user login"></input>
+                                </div>
+                                <br>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
         	</div>

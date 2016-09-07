@@ -54,17 +54,24 @@
 								{% endif %}
 
 								{% for rehersal in band.rehersals %}
-								<div class="row alert alert-warning" style="margin-left: 5px;margin-right: 5px;">
-									<div class="col-xs-4">
-										<small>{{ rehersal.location }}</small>
+
+									{% if rehersal.scheduled_at < date("Y-m-d H:i:s") %}
+										<div class="row alert alert-success" style="margin-left: 5px;margin-right: 5px;">
+									{% else %}
+									<div class="row alert alert-warning" style="margin-left: 5px;margin-right: 5px;">
+									{% endif %}
+									
+										<div class="col-xs-4">
+											<small>{{ rehersal.location }}</small>
+										</div>
+										<div class="col-xs-4">
+											<small>{{ rehersal.scheduled_at }}</small>
+										</div>
+										<div class="col-xs-4">
+											<small>{{ rehersal.note }}</small>
+										</div>									
 									</div>
-									<div class="col-xs-4">
-										<small>{{ rehersal.scheduled_at }}</small>
-									</div>
-									<div class="col-xs-4">
-										<small>{{ rehersal.note }}</small>
-									</div>									
-								</div>
+									
 								{% endfor %}
 							</li>
 							

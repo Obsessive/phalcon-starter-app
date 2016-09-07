@@ -23,7 +23,6 @@ function($scope, $http) {
 
 		rehersalsPromise
 			.then(function(response) {
-				console.log(response.data);
 				$scope.events = response.data;
 			}, function(err) {
 				$.notify('Error occured while generating calendar, sorry');
@@ -54,8 +53,12 @@ function($scope, $http) {
 		var rehersalDetailsPromise = $http(params);
 		rehersalDetailsPromise
 			.then(function(response) {
+
 				$scope.selectedRehersal = response.data;
+				var date = $scope.selectedRehersal.rehersal.scheduled_at;
+				$scope.selectedRehersal.rehersal.scheduled_at = moment(date).format('LLLL');
 				angular.element('#rehersal-details').fadeIn();
+				
 			}, function(err) {
 				$.notify('We can`t display rehersal details at the moment, sorry');
 			});
@@ -240,7 +243,6 @@ function($scope, $http) {
 			}, function(err) {
 				$.notify('Whoops...An error occured, sorry');
 			});
-
 	};
 
 }]);

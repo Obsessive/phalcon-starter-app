@@ -17,7 +17,12 @@ return call_user_func(
       $router->addGet('/', $p . 'Index::index');
       $router->addGet('/auth/callback', $p . 'Auth::callback');
       $router->addGet('/logout', $p . 'Index::logout');
-      $router->addPost('/preview', $p . 'Index::preview');
+      $router->addPost('/login', $p . 'Index::login');
+
+      /**
+       * Admin
+       */
+      $router->addPost('/admin', $p . 'Admin::index');
 
      /**
       * Dashboard

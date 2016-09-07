@@ -72,7 +72,7 @@
 					<div class="header">
 						<h5 class="title">
 							<i class="ti-pin-alt"></i>
-							<a href="#eventsList" data-toggle="collapse">Band events</a>
+							<a href="#eventsList" data-toggle="collapse">Events</a>
 						</h5>
 					</div>
 					<hr>
@@ -96,7 +96,7 @@
 					<div class="header">
 						<h5 class="title">
 							<i class="ti-pin-alt"></i>
-							<a href="#taggedPostsList" data-toggle="collapse">Band tagged posts</a>
+							<a href="#taggedPostsList" data-toggle="collapse">Tagged posts</a>
 						</h5>
 					</div>
 					<hr>

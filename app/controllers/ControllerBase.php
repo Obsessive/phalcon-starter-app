@@ -29,7 +29,11 @@ class ControllerBase extends Controller
 			return;
 		}
 
-		if (!$this->user && $controller == IndexController::class && $action == 'preview') {
+		if (!$this->user && $controller == IndexController::class && $action == 'login') {
+			return;
+		}
+
+		if (!$this->user && $controller == AdminController::class && $action == 'index') {
 			return;
 		}
 
@@ -56,11 +60,13 @@ class ControllerBase extends Controller
  		$requestLog = $this->di->get('app.log.request');
 
  		$data = [
- 			'uri' 		=> $this->request->getURI(),
- 			'params' 	=> $this->request->get(),
- 			'body'		=> $this->request->getJsonRawBody() 
+ 			'URL' 			=> $this->request->getURI(),
+ 			'PARAMETERS' 	=> $this->request->get(),
+ 			'REQUEST_BODY'	=> $this->request->getJsonRawBody() 
  		];
 
- 		$requestLog->info(json_encode($data));
+ 		$requestLog->info('-------------------------------------'.
+ 						  json_encode($data, JSON_PRETTY_PRINT)  .
+ 						  '-------------------------------------');
  	}
 }

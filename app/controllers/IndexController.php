@@ -25,14 +25,17 @@ class IndexController extends ControllerBase
     	$this->view->url = $this->facebookService->getLoginUrl();
     }
 
-    public function previewAction()
+    /**
+     * Test user login
+     */
+    public function loginAction()
     {
         if ($this->request->isPost()) {
 
             $username = $this->request->getPost('username');
             $password = $this->request->getPost('password');
 
-            if ($username === 'johndoe' && $password === 'bmTest666') {
+/*            if ($username ===  && $password === ) {
                 $testUser = User::findFirst(4);
                 $this->userService->setUser($testUser);
 
@@ -42,7 +45,7 @@ class IndexController extends ControllerBase
                 return $this->response->redirect('/dashboard');
             }
 
-            return $this->response->redirect('/');
+            return $this->response->redirect('/');*/
         }
     }
 
