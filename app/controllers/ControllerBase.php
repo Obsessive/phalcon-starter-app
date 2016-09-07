@@ -19,13 +19,18 @@ class ControllerBase extends Controller
 		$this->logRequest();
 
 		$userService = $this->di->get('app.services.user');
+		$session = $this->di->get('session');
 
-		$controller = $dispatcher->getControllerClass();
+		$controller = $dispatcher->getControllerClass();	
 		$action = $dispatcher->getActionName();
 
 		$this->user = $userService->getCurrentUser();
 
-		if ( !$this->user && $controller == AuthController::class && $action == 'callback' ) {
+		if ($this->user && ($session->get('is_admin'))) {
+			return $this->response->redirect('/admin');
+		}
+
+		if (!$this->user && $controller == AuthController::class && $action == 'callback' ) {
 			return;
 		}
 
@@ -37,7 +42,7 @@ class ControllerBase extends Controller
 			return;
 		}
 
-		if ( !$this->user && ($controller != IndexController::class) ) {
+		if (!$this->user && ($controller != IndexController::class) ) {
 			return $dispatcher->forward(['controller' => 'index', 'action' => 'notFound']);
 		}
 	}
@@ -65,8 +70,8 @@ class ControllerBase extends Controller
  			'REQUEST_BODY'	=> $this->request->getJsonRawBody() 
  		];
 
- 		$requestLog->info('-------------------------------------'.
- 						  json_encode($data, JSON_PRETTY_PRINT)  .
- 						  '-------------------------------------');
+ 		$requestLog->info(PHP_EOL . '-------------------------------------'. PHP_EOL .
+ 						  json_encode($data, JSON_PRETTY_PRINT) . PHP_EOL . 
+ 						  '-------------------------------------' . PHP_EOL);
  	}
 }

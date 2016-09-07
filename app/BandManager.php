@@ -21,9 +21,14 @@ class BandManager {
     private $application;
 
     /**
-     * @var use Phalcon\Session\Adapter\Files as SessionAdapter
+     * @var Phalcon\Session\Adapter\Files as SessionAdapter
      */
     private $session;
+
+    /**
+     * @var Phalcon\Config
+     */
+    private $config;
 
     public function __construct()
     {
@@ -37,6 +42,7 @@ class BandManager {
     {
         require APP_ROOT . '/app/config/services.php';
         $this->session = $this->di->get('session');
+        $this->config = $this->di->get('config');
     }
 
     /**
@@ -69,6 +75,7 @@ class BandManager {
             $logger = $this->di->get('app.log.error');
             $logger->error('Message: ' . $e->getMessage());
             $logger->error('Error trace: ' . $e->getTraceAsString());
+            exit;
         }
 	}
 

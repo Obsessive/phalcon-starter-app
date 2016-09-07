@@ -55,7 +55,7 @@
                                  
                         <div class="col-md-6">
                             <br>
-                            <h5 class="text-center">TEST USER</h5>
+                            <h5 class="text-center">TESTER</h5>
                             <form class="form" method="POST" action="/login">
                                 <div class="col-md-12">
                                     <div class="form-group">

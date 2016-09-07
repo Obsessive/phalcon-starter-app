@@ -124,4 +124,22 @@ class PageRepository extends Repository
 
         return $pageAdmins;
     }
+
+    /**
+     * Get all pages
+     */
+    public function findAll()
+    {
+        $pages = Page::find();
+
+        $res = [];
+        foreach ($pages as $page) {
+            $pageDTO = [];
+            $pageDTO = $page->toArray();
+            $pageDTO['profile'] = $page->profile->toArray();
+            $res[] = $pageDTO;
+        }
+        
+        return $res;
+    }
 }

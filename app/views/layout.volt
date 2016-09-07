@@ -25,9 +25,11 @@
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="{{ url('assets/css/themify-icons.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('assets/css/angular-simple-calendar.css') }}">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
 
     <!-- Custom -->
     <link href="{{ url('assets/css/custom.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body ng-app="BandManagerApp">
 
@@ -131,7 +133,7 @@
 </div>
 
     <!--   Core JS Files   -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
     <script src="{{ url('assets/js/bootstrap.min.js') }}" type="text/javascript"></script>
 
     <!--  Checkbox, Radio & Switch Plugins -->
@@ -142,6 +144,8 @@
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
     <script src="{{ url('assets/js/paper-dashboard.js') }}"></script>
+
+    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.9/angular-filter.min.js"></script>

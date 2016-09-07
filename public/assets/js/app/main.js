@@ -7,6 +7,55 @@ function($interpolateProvider, $httpProvider) {
 	$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 }]);
 
+app.controller('adminCtrl', ['$scope', '$http', 
+function($scope, $http) {
+
+	$scope.users = '';
+	$scope.bands = '';
+
+	$scope.init = function() {
+
+		$scope.getUsers();
+		$scope.getBands();
+	}
+
+	$scope.getUsers = function() {
+
+		var params = {
+			method: 'GET',
+			url: '/admin/users'
+		};
+
+		var usersPromise = $http(params);
+		usersPromise
+			.then(function(response) {
+				$scope.users = response.data;
+			}, function(err) {
+				$.notify('Error occured while fetching users, sorry');
+			});		
+	}
+
+	$scope.getBands = function() {
+
+		var params = {
+			method: 'GET',
+			url: '/admin/bands'
+		};
+
+		var bandsPromise = $http(params);
+		bandsPromise
+			.then(function(response) {
+				$scope.bands = response.data;
+				console.log($scope.bands);
+			}, function(err) {
+				$.notify('Error occured while fetching bands, sorry');
+			});		
+	}
+
+
+	$scope.init();
+
+}]);
 
 // Dashboard controller
 app.controller('dashboardCtrl', ['$scope', '$http', 

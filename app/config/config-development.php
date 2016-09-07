@@ -13,8 +13,17 @@ return [
 		'controllersDir' 	=> __DIR__ . '/../../app/controllers/',
 		'modelsDir'      	=> __DIR__ . '/../../app/models/',
 		'viewsDir'       	=> __DIR__ . '/../../app/views/',
-		'host'				=> 'http://myDomain.dev'
+		'host'				=> 'http://myDomain.dev',
+        'mode'              => 'dev'
 	],
+    'tester'    => [
+        'username'  => '',
+        'password'  => ''
+    ],
+    'admin'    => [
+        'username'  => '',
+        'password'  => ''
+    ],
     'volt' => [
         'path' => __DIR__ . '/../volt/',
         'extension' => '.compiled',

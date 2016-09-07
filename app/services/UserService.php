@@ -37,4 +37,22 @@ class UserService
 		$this->session->set('userId', $user->id);
 	}
 
+	/**
+	 * Set admin user
+	 */
+	public function setAdmin(User $user)
+	{	
+		$this->setUser($user);
+		$this->session->set('is_admin', true);
+	}
+
+	public function currentUserIsAdmin()
+	{
+		if ($this->session->get('is_admin') == true) {
+			return true;
+		}
+		
+		return false;
+	}
+
 }

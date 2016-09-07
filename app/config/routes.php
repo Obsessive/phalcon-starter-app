@@ -22,7 +22,9 @@ return call_user_func(
       /**
        * Admin
        */
-      $router->addPost('/admin', $p . 'Admin::index');
+      $router->add('/admin', $p . 'Admin::index')->via(['GET', 'POST']);
+      $router->addGet('/admin/users', $p . 'Admin::getAllUsers'); // AJAX
+      $router->addGet('/admin/bands', $p . 'Admin::getAllBands'); // AJAX
 
      /**
       * Dashboard

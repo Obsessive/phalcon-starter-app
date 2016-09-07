@@ -66,7 +66,7 @@ class UserRepository extends Repository
         $userProfile->save();
 
         if ($name) {
-            $user->name = $name; 
+            $user->name = $name;
             $user->save();
         }
 
@@ -75,7 +75,17 @@ class UserRepository extends Repository
 
     public function findAll()
     {
-        return User::find();
+        $users = User::find();
+
+        $res = [];
+        foreach ($users as $user) {
+            $userDTO = [];
+            $userDTO = $user->toArray();
+            $userDTO['profile'] = $user->profile->toArray();
+            $res[] = $userDTO;
+        }
+
+        return $res;
     }
 
 }
