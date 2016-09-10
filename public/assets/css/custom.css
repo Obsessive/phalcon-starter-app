@@ -6,3 +6,19 @@ a {
 	position:relative;
 	z-index: 999!important;
 }
+
+.ct-series-a .ct-bar {
+  stroke: blue;
+  stroke-width: 30px;
+}
+
+.ct-chart-bar .ct-label.ct-horizontal.ct-end {
+	padding-top: 5px;
+	font-size: 12px;
+	font-weight: 400;
+}
+
+.ct-label.ct-vertical.ct-start {
+	font-size: 10px;
+	font-weight: 400;
+}

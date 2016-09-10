@@ -26,6 +26,7 @@
     <link href="{{ url('assets/css/themify-icons.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('assets/css/angular-simple-calendar.css') }}">
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 
     <!-- Custom -->
     <link href="{{ url('assets/css/custom.css') }}" rel="stylesheet">
@@ -152,6 +153,8 @@
     <script src="{{ url('assets/js/angular-simple-calendar.js') }}"></script>
 
     <script src="http://momentjs.com/downloads/moment.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 
     <!-- Custom scripts -->
     <script src="{{ url('assets/js/app/main.js') }}"></script>

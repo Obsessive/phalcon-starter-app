@@ -1,3 +1,4 @@
+const APP_URL = './assets/js/app';
 
 var app = angular.module('BandManagerApp', ['angular.filter', '500tech.simple-calendar']);
 
@@ -12,11 +13,54 @@ function($scope, $http) {
 
 	$scope.users = '';
 	$scope.bands = '';
+	$scope.userDetailsModal = angular.element('#userDetailsModal');
+	$scope.bandDetailsModal = angular.element('#bandDetailsModal');
 
 	$scope.init = function() {
 
+		$scope.getGraph();
 		$scope.getUsers();
 		$scope.getBands();
+	}
+
+	$scope.getGraph = function() {
+
+		var params = {
+			method: 'GET',
+			url: '/admin/stats'
+		};
+
+		var statsPromise = $http(params);
+		statsPromise
+			.then(function(response) {
+				$scope.setGraphData(response.data);
+			}, function(err) {
+				$.notify('Error occured while fetching data for graph, sorry');
+			});
+	}
+
+	$scope.setGraphData = function(data) {
+
+		var labels = [];
+		var series = [];
+
+		angular.forEach(data, function(item, key) {
+			labels.push(item.day);
+			series.push(item.visits); 
+		});
+
+		var data = {
+			// A labels array that can contain any sort of values
+			labels: labels,
+			// Our series array that contains series objects or in this case series data arrays
+			series: [ series ]
+		};
+
+		// Create a new line chart object where as first parameter we pass in a selector
+		// that is resolving to our chart container element. The Second parameter
+		// is the actual data object.
+		new Chartist.Bar('.ct-chart', data);
+
 	}
 
 	$scope.getUsers = function() {
@@ -30,6 +74,7 @@ function($scope, $http) {
 		usersPromise
 			.then(function(response) {
 				$scope.users = response.data;
+				angular.element('#users').fadeIn();
 			}, function(err) {
 				$.notify('Error occured while fetching users, sorry');
 			});		
@@ -46,10 +91,24 @@ function($scope, $http) {
 		bandsPromise
 			.then(function(response) {
 				$scope.bands = response.data;
-				console.log($scope.bands);
+				angular.element('#bands').fadeIn();
 			}, function(err) {
 				$.notify('Error occured while fetching bands, sorry');
 			});		
+	}
+
+	$scope.showUserDetails = function(user) {
+		$scope.modalUser = user;
+		$scope.userDetailsModal.modal({
+			backdrop: false
+		});
+	}
+
+	$scope.showBandDetails = function(band) {
+		$scope.modalBand = band;
+		$scope.bandDetailsModal.modal({
+			backdrop: false
+		});
 	}
 
 

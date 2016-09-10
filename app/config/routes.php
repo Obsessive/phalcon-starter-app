@@ -17,7 +17,6 @@ return call_user_func(
       $router->addGet('/', $p . 'Index::index');
       $router->addGet('/auth/callback', $p . 'Auth::callback');
       $router->addGet('/logout', $p . 'Index::logout');
-      $router->addPost('/login', $p . 'Index::login');
 
       /**
        * Admin
@@ -25,6 +24,7 @@ return call_user_func(
       $router->add('/admin', $p . 'Admin::index')->via(['GET', 'POST']);
       $router->addGet('/admin/users', $p . 'Admin::getAllUsers'); // AJAX
       $router->addGet('/admin/bands', $p . 'Admin::getAllBands'); // AJAX
+      $router->addGet('/admin/stats', $p . 'Admin::getUserStats'); // AJAX
 
      /**
       * Dashboard

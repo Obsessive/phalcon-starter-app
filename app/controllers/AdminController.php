@@ -15,6 +15,7 @@ class AdminController extends Controller
 		$this->userRepository = $this->di->get('app.repositories.user');
 		$this->pageRepository = $this->di->get('app.repositories.page');
 		$this->rehersalsRepository = $this->di->get('app.repositories.rehersals');
+        $this->userStatsRepository = $this->di->get('app.repositories.user_stats');
 	}
 
     public function beforeExecuteRoute(Dispatcher $dispatcher)
@@ -42,6 +43,12 @@ class AdminController extends Controller
         }
     }
 
+    public function getUserStatsAction()
+    {
+        $stats = $this->userStatsRepository->getStats();
+        return $this->response->setJsonContent($stats);
+    }
+
     public function getAllUsersAction()
     {
         $users = $this->userRepository->findAll();
@@ -54,6 +61,14 @@ class AdminController extends Controller
         return $this->response->setJsonContent($bands);
     }
 
+    public function getUserDetails()
+    {
 
+    }
+
+    public function getBandDetails()
+    {
+        
+    }
 
 }

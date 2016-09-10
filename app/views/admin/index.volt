@@ -3,10 +3,11 @@
 {% block title %}Admin{% endblock %}
 
 {% block content %}
-<a href="/logout" class="col-md-1 col-md-offset-11 text-center">
-    <i class="ti-power-off"></i>
-    <p>Logout</p>
-</a>
+<div class="col-sm-12 col-md-2 col-md-offset-10 text-center">
+	<a href="/logout" class="btn btn-info">
+	    <i class="ti-power-off"></i>
+	</a>
+</div>
 <style>
 	.nav {
 		display: none!important;
@@ -14,54 +15,51 @@
 </style>
 
     <div class="content" ng-controller="adminCtrl">
+
+    	{% include 'admin/userDetailsModal.volt' %}
+    	{% include 'admin/bandDetailsModal.volt' %}
+
         <div class="container-fluid">
 
-        	<h4 class="title text-center">BandManager users</h4>
-        	<ul class="list-unstyled team-members" ng-repeat="user in users">
-	        	<li>
-	        		<div class="card">
-	        			<div class="content">
-		        			<div class="row text-center">
-		        				<div class="col-md-1">
-			        				<img src="{( user.profile.picture )}" class="img img-responsive img-thumbnail">
-			        			</div>
-			        			<div class="col-md-3">
-			        				<h5>{( user.name )}</h5>
-			        			</div>
-			        			<div class="col-md-3">
-			        				<h5>{( user.profile.email )}</h5>
-			        			</div>
-			        			<div class="col-md-3">
-			        				<h5>{( user.profile.location )}</h5>
-			        			</div>
-		        			</div>	
-	        			</div>
-	        		</div>
-	        	</li>
-        	</ul>
+        	{% include 'admin/usersGraph.volt' %}
 
-        	<hr class="text-muted" style="border:1px solid;margin:70px;">
 
-        	<h4 class="title text-center">BandManager bands</h4>
-        	<ul class="list-unstyled team-members" ng-repeat="band in bands">
-	        	<li>
-	        		<div class="card">
-	        			<div class="content">
+        	<div id="users" style="display: none">
+	        	<h4 class="title text-center">BandManager users</h4>
+	        	<ul class="list-unstyled team-members" ng-repeat="user in users">
+		        	<li ng-click="showUserDetails(user)">
+		        		<a href="" class="list-group-item">
 		        			<div class="row text-center">
-		        				<div class="col-md-1">
-			        				<img src="{( band.profile.picture )}" class="img img-responsive img-thumbnail">
+			        			<div class="col-md-6">
+			        				<h6>{( user.name )}</h6>
 			        			</div>
 			        			<div class="col-md-6">
-			        				<h5>{( band.name )}</h5>
-			        			</div>
-			        			<div class="col-md-5">
-			        				<h5>{( band.profile.genre )}</h5>
-			        			</div>
+			        					Registered: {( user.created_at )}
+			        			</div>			        			
 		        			</div>	
-	        			</div>
-	        		</div>
-	        	</li>
-        	</ul>
+		        		</a>
+		        	</li>
+	        	</ul>
+	        </div>
+
+        	<div id="bands" style="display: none">
+	        	<hr class="text-muted" style="border:1px solid;margin:70px;">
+	        	<h4 class="title text-center">BandManager bands</h4>
+	        	<ul class="list-unstyled team-members" ng-repeat="band in bands">
+		        	<li ng-click="showBandDetails(band)">
+		        		<a href="#" class="list-group-item">
+		        			<div class="row text-center">
+			        			<div class="col-md-6">
+			        				<h6>{( band.name )}</h6>
+			        			</div>
+			        			<div class="col-md-6">
+			        				<span>Facebook Page ID: {( band.facebook_page_id )}</span>
+			        			</div>		
+		        			</div>
+		        		</a>
+		        	</li>
+	        	</ul>
+	        </div>
 
         </div>
     </div>

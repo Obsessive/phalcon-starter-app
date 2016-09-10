@@ -26,30 +26,6 @@ class IndexController extends ControllerBase
     }
 
     /**
-     * Test user login
-     */
-    public function loginAction()
-    {
-        if ($this->request->isPost()) {
-
-            $username = $this->request->getPost('username');
-            $password = $this->request->getPost('password');
-
-/*            if ($username ===  && $password === ) {
-                $testUser = User::findFirst(4);
-                $this->userService->setUser($testUser);
-
-                $testToken = $this->config->facebook->test_token;
-                $this->session->set('accessToken', $testToken);
-
-                return $this->response->redirect('/dashboard');
-            }
-
-            return $this->response->redirect('/');*/
-        }
-    }
-
-    /**
      * Logout user
      */
     public function logoutAction()
