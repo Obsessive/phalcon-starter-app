@@ -4,7 +4,8 @@
 		<div class="modal-content">
 			<div class="modal-header text-center">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">User Details</h4>
+				<h4 class="modal-title text-left">User Details</h4>
+				<br>
 				<img src="{( modalUser.profile.cover )}" class="img img-responsive" />
 				<img src="{( modalUser.profile.picture )}" class="img img-responsive img-thumbnail" style="max-width: 200px;margin-top: -170px" />
 			</div>

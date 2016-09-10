@@ -100,7 +100,7 @@ $this->di->setShared('app.services.migration', function() {
 });
 
 $this->di->setShared('app.services.user', function() {
-    return new app\services\UserService( $this->di->get('session') );
+    return new app\services\UserService( $this->di->get('session'), $this->di->get('app.repositories.user_stats') );
 });
 
 $this->di->setShared('app.services.facebook', function() {

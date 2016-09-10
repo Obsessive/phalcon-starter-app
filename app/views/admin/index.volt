@@ -3,13 +3,16 @@
 {% block title %}Admin{% endblock %}
 
 {% block content %}
-<div class="col-sm-12 col-md-2 col-md-offset-10 text-center">
+<div class="col-sm-12 col-md-2 col-md-offset-10 text-center" style="padding-top: 10px">
 	<a href="/logout" class="btn btn-info">
 	    <i class="ti-power-off"></i>
 	</a>
 </div>
 <style>
-	.nav {
+	.nav, 
+	.navbar,
+	.navbar-toggle
+ 	{
 		display: none!important;
 	}
 </style>

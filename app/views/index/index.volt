@@ -31,7 +31,7 @@
     <div class="container-fluid" style="padding: 60px">
     	<div class="row" style="padding-bottom: 150px;padding-top: 140px">
     		<br>
-            <div class="col-md-10 text-center animated flipInY">
+            <div class="col-md-10 text-center animated fadeInLeft">
             	<h2 class="text-left">
             		Welcome To <a href="/"><b class="text-danger">BandManager</b></a>
             		<br>
@@ -44,7 +44,7 @@
             	<small class="text-muted">* BandManager is using Facebook login/register system for user authentication</small>
                 </div>
             </div>
-            <div class="col-md-2 animated fadeInRight text-center" style="border: 1px solid #F1EAE0; border-radius: 5px">
+            <div class="col-md-2 animated fadeInRightBig text-center" style="border: 1px solid #F1EAE0; border-radius: 5px">
                 <div class="card">
                     <div class="col-md-12">
                         <br>

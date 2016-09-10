@@ -7,6 +7,22 @@ use app\models\UserStats;
 class UserStatsRepository extends Repository
 {
     protected $modelClass = UserStats::class;
+	const DATE_FORMAT 	= 'Y-m-d';
+
+    public function update()
+    {
+    	$today = date(self::DATE_FORMAT);
+    	$todayStat = $this->findFirstBy(['date' => $today]);
+
+    	if (! $todayStat) {
+    		$todayStat = new UserStats;
+    		$todayStat->counter = 0;
+    		$todayStat->date = $today;
+    	}
+
+    	$todayStat->counter = $todayStat->counter + 1;
+    	$todayStat->save();
+    }
 
     public function getStats()
     {

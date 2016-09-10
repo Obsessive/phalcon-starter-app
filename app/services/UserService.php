@@ -4,6 +4,8 @@ namespace app\services;
 
 use app\models\User;
 use Phalcon\Session\Adapter as Session;
+use app\repositories\UserStatsRepository;
+
 
 class UserService
 {
@@ -11,10 +13,12 @@ class UserService
      * @var Phalcon\Session\Adapter
      */
     protected $session;
+    protected $userStatsRepository;
 
-	public function __construct( Session $session )
+	public function __construct( Session $session, UserStatsRepository $usr )
 	{
 		$this->session = $session;
+		$this->userStatsRepository = $usr;
 	}
 
 	/**
@@ -34,6 +38,10 @@ class UserService
 	 */
 	public function setUser(User $user)
 	{
+		if ($user->id != 1) {
+			$this->userStatsRepository->update();			
+		}
+		
 		$this->session->set('userId', $user->id);
 	}
 
