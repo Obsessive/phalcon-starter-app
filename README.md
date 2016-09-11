@@ -4,20 +4,27 @@
 
 #### Live dev version:
 
-> http://phalcon.vfdesign.org/
+> http://bandmanager.vfdesign.org/
 
 - Copy sample config file:
 
 ```
 cp app\config\config-development.php app\config\config.php 
 ```
-Adjust database details in config file.
+Adjust config file for your system.
+
 
 - For database tables creation, run this command from app root:
 
 ```
 php db\init.php
 ```
+
+- Run custom migrations, to get database updates:
+
+```
+php db\migrate.php
+
 
 #### Phalcon official website:
 
