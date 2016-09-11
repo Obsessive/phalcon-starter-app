@@ -6,6 +6,8 @@
 
 > http://bandmanager.vfdesign.org/
 
+(If you want to try the app as tester, just send me a message to vfranic@gmail.com)
+
 - Copy sample config file:
 
 ```
