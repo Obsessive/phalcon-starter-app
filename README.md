@@ -3,6 +3,8 @@
 BandManager - application for managing your bands, rehersals etc. 
 Based on Facebook Graph data fetching.
 
+### Setup
+
 - Copy sample config file:
 
 ```
