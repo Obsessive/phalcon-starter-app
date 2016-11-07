@@ -1,12 +1,7 @@
 ## Phalcon Starter App
 
-(My personal app development)
-
-#### Live dev version:
-
-> http://bandmanager.vfdesign.org/
-
-(If you want to try the app as tester, just send me a message to vfranic@gmail.com)
+BandManager - application for managing your bands, rehersals etc. 
+Based on Facebook Graph data fetching.
 
 - Copy sample config file:
 
