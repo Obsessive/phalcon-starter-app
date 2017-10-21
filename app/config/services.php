@@ -45,7 +45,7 @@ $this->di->setShared('view', function() {
 
 $this->di->set('volt', function($view) {
 
-    $config = $this->di->get('config');
+    $config = $this->get('config');
     $volt= new View\Engine\Volt($view, $this->di);
     $volt->setOptions(
         [
@@ -62,7 +62,7 @@ $this->di->set('volt', function($view) {
 });
 
 $this->di->set('db', function() {
-    $config = $this->di->get('config');
+    $config = $this->get('config');
 	return new DbAdapter(array(
 		'host' => $config->database->host,
 		'username' => $config->database->username,
@@ -96,22 +96,22 @@ $this->di->setShared('app.repositories.user_stats', function() {
 
 /* Services */
 $this->di->setShared('app.services.migration', function() {
-    return new app\services\MigrationService( $this->di->get('db') );
+    return new app\services\MigrationService( $this->get('db') );
 });
 
 $this->di->setShared('app.services.user', function() {
-    return new app\services\UserService( $this->di->get('session'), $this->di->get('app.repositories.user_stats') );
+    return new app\services\UserService( $this->get('session'), $this->get('app.repositories.user_stats') );
 });
 
 $this->di->setShared('app.services.facebook', function() {
-    $config = $this->di->get('config');
+    $config = $this->get('config');
     $facebook = new Facebook\Facebook($config->facebook->toArray());
-    return new app\services\FacebookService( $facebook, $this->di->get('config'), $this->di->get('app.log.error'), $this->di->get('app.services.user'), $this->di->get('session') );
+    return new app\services\FacebookService( $facebook, $this->get('config'), $this->get('app.log.error'), $this->get('app.services.user'), $this->get('session') );
 });
 
 $this->di->setShared('app.services.plivo', function () {
-    $plivo = new Plivo\RestAPI( $this->di->get('config')->plivo->auth_id, $this->di->get('config')->plivo->auth_token );
-    return new \app\services\PlivoService( $plivo, $this->di->get('app.repositories.page'), $this->di->get('app.services.user'), $this->di->get('app.log.plivo') );
+    $plivo = new Plivo\RestAPI( $this->get('config')->plivo->auth_id, $this->get('config')->plivo->auth_token );
+    return new \app\services\PlivoService( $plivo, $this->get('app.repositories.page'), $this->get('app.services.user'), $this->get('app.log.plivo') );
 });
 
 

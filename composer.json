@@ -7,5 +7,8 @@
     "require": {
         "facebook/php-sdk-v4": "^5.2",
         "plivo/plivo-php": "^1.1"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^3.3"
     }
 }

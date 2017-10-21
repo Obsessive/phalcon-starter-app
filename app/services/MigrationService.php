@@ -31,7 +31,7 @@ class MigrationService
 
         } catch (\Exception $e) {
             echo 'Error occured: ' . $e->getMessage();
-            return;
+            exit;
         }
 
         echo 'Initial database tables are successfully created.' . PHP_EOL;
@@ -46,8 +46,13 @@ class MigrationService
         $nextMigration = $latestMigration + 1;
 
         while ($this->migrationExists($nextMigration)) {
-            $this->runMigration($nextMigration);
-            $nextMigration++;
+            try {
+                $this->runMigration($nextMigration);
+                $nextMigration++;   
+            } catch (\Exception $e) {
+                echo $e->getMessage();
+                exit;
+            }
         }
 
         if ($nextMigration - 1 == $latestMigration)
