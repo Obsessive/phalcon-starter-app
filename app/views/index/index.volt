@@ -125,16 +125,16 @@
         <hr>
 
         <div class="row" style="padding-bottom: 100px;padding-top: 100px">
-            <div class="col-md-6">
-                <a href="#" data-featherlight="assets/img/app/4.jpg">
-                    <img src="assets/img/app/4a.jpg" class="img img-responsive">
-                </a>
-            </div>
             <div class="col-md-6 text-center">
                 <h2 class="text-info" style="font-weight: 100;line-height: 50px;padding-top: 4%">
                     Interested in new gigs and venues ?
                 </h2>
                 <h3 class="text-info" style="font-weight: 100;line-height: 50px;padding-top: 4%">Check out all latest venues, all around the world - you can also read all the reviews for each venue, all from the BandManager app</h2>
+            </div>
+            <div class="col-md-6">
+                <a href="#" data-featherlight="assets/img/app/4.jpg">
+                    <img src="assets/img/app/4a.jpg" class="img img-responsive">
+                </a>
             </div>
         </div>
 
@@ -145,13 +145,8 @@
                 <nav class="pull-left">
                     <ul>
                         <li>
-                            <a href="/">
-                               Support
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/">
-                                FAQ
+                            <a href="mailto:vfranic@gmail.com">
+                               <small>Developer</small>: Vicko Franić (vfranic@gmail.com)
                             </a>
                         </li>
                     </ul>
