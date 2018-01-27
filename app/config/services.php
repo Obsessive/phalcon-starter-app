@@ -46,7 +46,7 @@ $this->di->setShared('view', function() {
 $this->di->set('volt', function($view) {
 
     $config = $this->get('config');
-    $volt= new View\Engine\Volt($view, $this->di);
+    $volt= new View\Engine\Volt($view);
     $volt->setOptions(
         [
             'autoescape'        => false,
