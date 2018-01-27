@@ -8,6 +8,8 @@ return call_user_func(
       $createDefaultRoutes = false;
       $router = new Router($createDefaultRoutes);
 
+      $router->setUriSource(Router::URI_SOURCE_SERVER_REQUEST_URI);
+
       // prefix
       $p = 'app\controllers\\';
 
