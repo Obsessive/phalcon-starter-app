@@ -7,7 +7,6 @@ Based on Facebook Graph data fetching.
 
 - Copy sample config file:
 
-
 ```
 cp app\config\config-development.php app\config\config.php 
 ```
