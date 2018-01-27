@@ -1,1 +1,0 @@
-web: /app/apache/bin/httpd public
