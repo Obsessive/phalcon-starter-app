@@ -5,6 +5,8 @@ Based on Facebook Graph data fetching.
 
 ### Dashboard
 
+https://bandmanager.floydiansplit.com
+
 ![img](bandmanager.png)
 
 
